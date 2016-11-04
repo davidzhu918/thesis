@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  4 NOV 2016 01:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  4 NOV 2016 03:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -518,20 +518,45 @@ Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 Package: ulem 2012/05/18
 \ULdepth=\dimen124
 )
+(/usr/local/texlive/2016basic/texmf-dist/tex/latex/blindtext/blindtext.sty
+Package: blindtext 2012/01/06 V2.0 blindtext-Package
+
+(/usr/local/texlive/2016basic/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+\c@blindtext=\count295
+\c@Blindtext=\count296
+\c@blind@countparstart=\count297
+\blind@countxx=\count298
+\blindtext@numBlindtext=\count299
+\blind@countyy=\count300
+\c@blindlist=\count301
+\c@blindlistlevel=\count302
+\c@blindlist@level=\count303
+\blind@listitem=\count304
+\c@blind@listcount=\count305
+\c@blind@levelcount=\count306
+\blind@mathformula=\count307
+\blind@Mathformula=\count308
+\c@blind@randomcount=\count309
+\c@blind@randommax=\count310
+\c@blind@pangramcount=\count311
+\c@blind@pangrammax=\count312
+)
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count295
-\calc@Bcount=\count296
+\calc@Acount=\count313
+\calc@Bcount=\count314
 \calc@Adimen=\dimen125
 \calc@Bdimen=\dimen126
 \calc@Askip=\skip97
 \calc@Bskip=\skip98
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count297
+\calc@Ccount=\count315
 \calc@Cskip=\skip99
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -557,13 +582,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count298
+\inf@bad=\count316
 LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count299
-\leftroot@=\count300
+\uproot@=\count317
+\leftroot@=\count318
 LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count301
-\DOTSCASE@=\count302
+\classnum@=\count319
+\DOTSCASE@=\count320
 LaTeX Info: Redefining \ldots on input line 394.
 LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
@@ -572,15 +597,15 @@ LaTeX Info: Redefining \cdots on input line 518.
 \big@size=\dimen129
 LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
-\macc@depth=\count303
-\c@MaxMatrixCols=\count304
+\macc@depth=\count321
+\c@MaxMatrixCols=\count322
 \dotsspace@=\muskip11
-\c@parentequation=\count305
-\dspbrk@lvl=\count306
+\c@parentequation=\count323
+\dspbrk@lvl=\count324
 \tag@help=\toks20
-\row@=\count307
-\column@=\count308
-\maxfields@=\count309
+\row@=\count325
+\column@=\count326
+\maxfields@=\count327
 \andhelp@=\toks21
 \eqnshift@=\dimen130
 \alignsep@=\dimen131
@@ -599,7 +624,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count310
+\g_MT_multlinerow_int=\count328
 \l_MT_multwidth_dim=\dimen136
 \origjot=\skip103
 \l_MT_shortvdotswithinadjustabove_dim=\dimen137
@@ -615,14 +640,14 @@ nment
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count311
+\c@float@type=\count329
 \float@exts=\toks24
 \float@box=\box33
 \@float@everytoks=\toks25
 \@floatcapt=\box34
 )
 \@float@every@algorithm=\toks26
-\c@algorithm=\count312
+\c@algorithm=\count330
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/algorithmicx/algpseudocode.s
 ty
@@ -633,15 +658,15 @@ y
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count313
-\c@ALG@rem=\count314
-\c@ALG@nested=\count315
+\c@ALG@line=\count331
+\c@ALG@rem=\count332
+\c@ALG@nested=\count333
 \ALG@tlm=\skip104
 \ALG@thistlm=\skip105
-\c@ALG@Lnr=\count316
-\c@ALG@blocknr=\count317
-\c@ALG@storecount=\count318
-\c@ALG@tmpcounter=\count319
+\c@ALG@Lnr=\count334
+\c@ALG@blocknr=\count335
+\c@ALG@storecount=\count336
+\c@ALG@tmpcounter=\count337
 \ALG@tmplength=\skip106
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
@@ -696,10 +721,10 @@ red.code.tex
 \pgf@yc=\dimen152
 \w@pgf@writea=\write5
 \r@pgf@reada=\read2
-\c@pgf@counta=\count320
-\c@pgf@countb=\count321
-\c@pgf@countc=\count322
-\c@pgf@countd=\count323
+\c@pgf@counta=\count338
+\c@pgf@countb=\count339
+\c@pgf@countc=\count340
+\c@pgf@countd=\count341
 \t@pgf@toka=\toks31
 \t@pgf@tokb=\toks32
 \t@pgf@tokc=\toks33
@@ -720,8 +745,8 @@ File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoft
 path.code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count324
-\pgfsyssoftpath@bigbuffer@items=\count325
+\pgfsyssoftpath@smallbuffer@items=\count342
+\pgfsyssoftpath@bigbuffer@items=\count343
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprot
 ocol.code.tex
@@ -756,7 +781,7 @@ tex)
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/math/pgfmathparser.cod
 e.tex
 \pgfmath@dimen=\dimen153
-\pgfmath@count=\count326
+\pgfmath@count=\count344
 \pgfmath@box=\box36
 \pgfmath@toks=\toks34
 \pgfmath@stack@operand=\toks35
@@ -782,7 +807,7 @@ misc.code.tex)
 integerarithmetics.code.tex)))
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code
 .tex
-\c@pgfmathroundto@lastzeros=\count327
+\c@pgfmathroundto@lastzeros=\count345
 ))
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoin
 ts.code.tex
@@ -820,7 +845,7 @@ File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
 \pgfpic=\box37
 \pgf@hbox=\box38
 \pgf@layerbox@main=\box39
-\pgf@picture@serial@count=\count328
+\pgf@picture@serial@count=\count346
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregrap
 hicstate.code.tex
@@ -855,7 +880,7 @@ File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 e.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen177
-\pgf@sys@shading@range@num=\count329
+\pgf@sys@shading@range@num=\count347
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimag
 e.code.tex
@@ -920,7 +945,7 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
 othandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count330
+\pgf@plot@mark@count=\count348
 \pgfplotmarksize=\dimen182
 )
 \tikz@lastx=\dimen183
@@ -933,19 +958,19 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikz@figbox@bg=\box43
 \tikz@tempbox=\box44
 \tikz@tempbox@bg=\box45
-\tikztreelevel=\count331
-\tikznumberofchildren=\count332
-\tikznumberofcurrentchild=\count333
-\tikz@fig@count=\count334
+\tikztreelevel=\count349
+\tikznumberofchildren=\count350
+\tikznumberofcurrentchild=\count351
+\tikz@fig@count=\count352
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/modules/pgfmodulematri
 x.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count335
-\pgfmatrixcurrentcolumn=\count336
-\pgf@matrix@numberofcolumns=\count337
+\pgfmatrixcurrentrow=\count353
+\pgfmatrixcurrentcolumn=\count354
+\pgf@matrix@numberofcolumns=\count355
 )
-\tikz@expandcount=\count338
+\tikz@expandcount=\count356
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
 raries/tikzlibrarytopaths.code.tex
@@ -1035,7 +1060,7 @@ File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
 tersections.code.tex
 (/usr/local/texlive/2016basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryfp
 u.code.tex)
-\pgf@intersect@solutions=\count339
+\pgf@intersect@solutions=\count357
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/pgfopts/pgfopts.sty
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
@@ -1065,24 +1090,24 @@ L3 Module: l3tl 2016/03/26 v6465 L3 Token lists
 L3 Module: l3str 2016/03/24 v6441 L3 Strings
 L3 Module: l3seq 2015/08/05 v5777 L3 Sequences and stacks
 L3 Module: l3int 2016/03/24 v6441 L3 Integers
-\c_max_int=\count340
-\l_tmpa_int=\count341
-\l_tmpb_int=\count342
-\g_tmpa_int=\count343
-\g_tmpb_int=\count344
+\c_max_int=\count358
+\l_tmpa_int=\count359
+\l_tmpb_int=\count360
+\g_tmpa_int=\count361
+\g_tmpb_int=\count362
 L3 Module: l3quark 2015/08/17 v5855 L3 Quarks
 L3 Module: l3prg 2015/11/01 v6216 L3 Control structures
-\g__prg_map_int=\count345
+\g__prg_map_int=\count363
 L3 Module: l3clist 2015/09/02 v5901 L3 Comma separated lists
 L3 Module: l3token 2016/04/03 v6470 L3 Experimental token manipulation
 L3 Module: l3prop 2016/01/05 v6366 L3 Property lists
 L3 Module: l3msg 2016/03/26 v6464 L3 Messages
 L3 Module: l3file 2016/03/25 v6458 L3 File and I/O operations
-\l_iow_line_count_int=\count346
-\l__iow_target_count_int=\count347
-\l__iow_current_line_int=\count348
-\l__iow_current_word_int=\count349
-\l__iow_current_indentation_int=\count350
+\l_iow_line_count_int=\count364
+\l__iow_target_count_int=\count365
+\l__iow_current_line_int=\count366
+\l__iow_current_word_int=\count367
+\l__iow_current_indentation_int=\count368
 L3 Module: l3skip 2016/01/05 v6366 L3 Dimensions and skips
 \c_zero_dim=\dimen189
 \c_max_dim=\dimen190
@@ -1103,18 +1128,18 @@ L3 Module: l3skip 2016/01/05 v6366 L3 Dimensions and skips
 \g_tmpa_muskip=\muskip16
 \g_tmpb_muskip=\muskip17
 L3 Module: l3keys 2015/11/17 v6284 L3 Key-value interfaces
-\g__keyval_level_int=\count351
-\l_keys_choice_int=\count352
+\g__keyval_level_int=\count369
+\l_keys_choice_int=\count370
 L3 Module: l3fp 2016/03/26 v6465 L3 Floating points
-\c__fp_leading_shift_int=\count353
-\c__fp_middle_shift_int=\count354
-\c__fp_trailing_shift_int=\count355
-\c__fp_big_leading_shift_int=\count356
-\c__fp_big_middle_shift_int=\count357
-\c__fp_big_trailing_shift_int=\count358
-\c__fp_Bigg_leading_shift_int=\count359
-\c__fp_Bigg_middle_shift_int=\count360
-\c__fp_Bigg_trailing_shift_int=\count361
+\c__fp_leading_shift_int=\count371
+\c__fp_middle_shift_int=\count372
+\c__fp_trailing_shift_int=\count373
+\c__fp_big_leading_shift_int=\count374
+\c__fp_big_middle_shift_int=\count375
+\c__fp_big_trailing_shift_int=\count376
+\c__fp_Bigg_leading_shift_int=\count377
+\c__fp_Bigg_middle_shift_int=\count378
+\c__fp_Bigg_trailing_shift_int=\count379
 L3 Module: l3box 2015/08/09 v5822 L3 Experimental boxes
 \c_empty_box=\box66
 \l_tmpa_box=\box67
@@ -1164,15 +1189,15 @@ L3 Module: l3luatex 2016/03/26 v6465 L3 Experimental LuaTeX-specific functions
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 File: l3pdfmode.def 2016/03/26 v6465 L3 Experimental driver: PDF mode
-\l__driver_color_stack_int=\count362
+\l__driver_color_stack_int=\count380
 \l__driver_tmp_box=\box81
 ))
 Package: xparse 2016/05/18 v6512 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count363
-\l__xparse_m_args_int=\count364
-\l__xparse_mandatory_args_int=\count365
-\l__xparse_processor_int=\count366
-\l__xparse_v_nesting_int=\count367
+\l__xparse_current_arg_int=\count381
+\l__xparse_m_args_int=\count382
+\l__xparse_mandatory_args_int=\count383
+\l__xparse_processor_int=\count384
+\l__xparse_v_nesting_int=\count385
 )
 .................................................
 . LaTeX info: "xparse/define-command"
@@ -1184,19 +1209,19 @@ Package: xparse 2016/05/18 v6512 L3 Experimental document command parser
 . 
 . Defining command \ProvidesForestLibrary with sig. 'm O{}' on line 99.
 .................................................
-\safeloop@depth=\count368
-\safeRKloop@depth=\count369
+\safeloop@depth=\count386
+\safeRKloop@depth=\count387
 \forest@temp@dimen=\dimen276
-\forest@temp@count=\count370
-\forest@n=\count371
-\forest@temp@global@count=\count372
+\forest@temp@count=\count388
+\forest@n=\count389
+\forest@temp@global@count=\count390
 \forest@temp@toks=\toks41
-\forest@sort@m=\count373
-\forest@sort@k=\count374
-\forest@sort@p=\count375
+\forest@sort@m=\count391
+\forest@sort@k=\count392
+\forest@sort@p=\count393
 \bracket@content=\toks42
 \bracket@afterthought=\toks43
-\forest@node@maxid=\count376
+\forest@node@maxid=\count394
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -1226,8 +1251,8 @@ Package: xparse 2016/05/18 v6512 L3 Experimental document command parser
 . 
 . Defining command \Forest with sig. 's D(){} m' on line 6870.
 .................................................
-\forest@externalize@max@outer@n=\count377
-\forest@externalize@inner@n=\count378
+\forest@externalize@max@outer@n=\count395
+\forest@externalize@inner@n=\count396
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/forest/forest-lib-linguistic
 s.sty
@@ -1555,43 +1580,43 @@ Package biblatex Info: ... file 'english.lbx' found.
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2016/09/17 v3.6 biblatex localization (PK/JW/AB)
 )
-\@quotelevel=\count379
-\@quotereset=\count380
+\@quotelevel=\count397
+\@quotereset=\count398
 
 (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 53.
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (/usr/local/texlive/2016basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count381
+\scratchcounter=\count399
 \scratchdimen=\dimen281
 \scratchbox=\box84
-\nofMPsegments=\count382
-\nofMParguments=\count383
+\nofMPsegments=\count400
+\nofMParguments=\count401
 \everyMPshowfont=\toks50
-\MPscratchCnt=\count384
+\MPscratchCnt=\count402
 \MPscratchDim=\dimen282
-\MPnumerator=\count385
-\makeMPintoPDFobject=\count386
+\MPnumerator=\count403
+\makeMPintoPDFobject=\count404
 \everyMPtoPDFconversion=\toks51
 ) (/usr/local/texlive/2016basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1658,10 +1683,10 @@ Package biblatex Warning: Biber reported the following issues
 (biblatex)                - Invalid format of field 'month'.
 
 )
-Package biblatex Info: Reference section=0 on input line 52.
-Package biblatex Info: Reference segment=0 on input line 52.
+Package biblatex Info: Reference section=0 on input line 53.
+Package biblatex Info: Reference segment=0 on input line 53.
 \AtBeginShipoutBox=\box85
-Package hyperref Info: Link coloring OFF on input line 52.
+Package hyperref Info: Link coloring OFF on input line 53.
  (/usr/local/texlive/2016basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1669,11 +1694,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 y
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count387
+\c@section@level=\count405
 )
-LaTeX Info: Redefining \ref on input line 52.
-LaTeX Info: Redefining \pageref on input line 52.
-LaTeX Info: Redefining \nameref on input line 52.
+LaTeX Info: Redefining \ref on input line 53.
+LaTeX Info: Redefining \pageref on input line 53.
+LaTeX Info: Redefining \nameref on input line 53.
  (./thesis.out) (./thesis.out)
 \@outlinefile=\write6
 \openout6 = `thesis.out'.
@@ -1749,50 +1774,61 @@ Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 74.
  [5] [6] [7]) (./chapter3.tex [8]
 Chapter 3.
-) (./chapter4.tex [9
 
-]
+Overfull \hbox (61.80745pt too wide) in paragraph at lines 17--26
+ [] 
+ []
+
+) [9
+
+] (./chapter4.tex [10pdfTeX warning (ext4): destination with the same identifie
+r (name{table.3.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \chapter
+            {Discussion}]
 Chapter 4.
-) (./chapter5.tex [10
+) (./chapter5.tex [11
 
 ]
 Chapter 5.
-) (./appendix.tex [11
+) (./appendix.tex [12
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
- [12
+ [13
 
 ]
 Appendix A.
-[13
+[14
 
 ]
 Appendix B.
-) [14
+) [15
 
-] (./vita.tex [15
+] (./vita.tex [16
 
-]) [16
+]) [17
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 235.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 235.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 236.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 236.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 235.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 235.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 236.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 236.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 144BF856BA369C229A4D37F43CB9278D;1293.
+(rerunfilecheck)             Checksum: 1E897ACBB791AEE574958E78B767095F;1446.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 41502 strings out of 494447
- 889736 string characters out of 6166766
- 1087444 words of memory out of 5000000
- 44231 multiletter control sequences out of 15000+600000
+ 41690 strings out of 494447
+ 892923 string characters out of 6166766
+ 1092488 words of memory out of 5000000
+ 44409 multiletter control sequences out of 15000+600000
  14184 words of font info for 36 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  144i,9n,167p,10381b,1830s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1802,10 +1838,10 @@ r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr
 /local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loca
 l/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (24 pages, 89495 bytes).
+Output written on thesis.pdf (25 pages, 93133 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 246 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 263 compressed objects within 3 object streams
+ 70 named destinations out of 1000 (max. 500000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,5 +1,29 @@
 \chapter{Empirical Evaluation}
 
 \section{Experiment Setup}
+\subsection{Experimental Subjects}
+The experimental subjects used in the study is consisted of three student-developed projects that use PHP as their backend language.
+
+\subsection{Tools Used in Evaluation}
+We evaluate the effectiveness of our interface discovery mechanism by comparing the number and quality of interfaces that it generates with the interfaces extracted by web crawlers. The web crawler tool that we used is PHPCrawl, an open-sourced framework for crawling/spidering websites written in PHP. For each interface output, we check if any of the HTTP requests in this output is processed in the backend program.
+
+We evaluate the effectiveness of our test request generation mechanism by comparing it against another PHP test case generation tool, PHPUnit. For each HTTP request, a set of possible values is generated for all of the fields in this request, creating a set of test HTTP requests, which are then sent to the server. Then the final code coverage in the backend is recorded.
 
 \section{Results}
+% This is a table
+\begin{table}
+\caption{Interface Discovery Results}
+\begin{center}
+\begin{tabular}{cccc}
+Project Name & \# Identified Interfaces (PHPCrawl) & \# Identified Interfaces (current) & Improvement \\
+\hline
+CS4400 & 6 & 4 & 0 \\
+Email & 6 & 3 & 0 \\
+STP & 6 & 2 & 0 \\
+TodoList & 6 & 2 & 0 \\
+\label{Interface Discovery Results}
+\end{tabular}
+\end{center}
+\end{table}
+
+\blindtext
