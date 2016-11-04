@@ -14,11 +14,6 @@
 \usepackage[page]{appendix}  %for appendices
 \usepackage{rotating}  %for rotated, landscape images
 \usepackage{ulem}  %for underlined section titles
-% additional packages
-\usepackage{mathtools}
-\usepackage{algorithm,algpseudocode}
-\usepackage[linguistics]{forest}
-\usepackage[utf8]{inputenc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
@@ -63,7 +58,7 @@
 % Approval Page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \input{approvalPage.tex}
+\input{approvalPage.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Epigraph
@@ -75,7 +70,7 @@
 % Dedication
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \input{dedication.tex}
+\input{dedication.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Acknowledgments
@@ -145,7 +140,7 @@
 % This is the Summary (abstract should be separate document)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{abstract.tex}
+\input{summary.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
