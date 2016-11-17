@@ -9,6 +9,7 @@
 \usepackage{times}  %set Times New Roman as the font
 \usepackage[explicit]{titlesec}  %title control and formatting
 \usepackage[titles]{tocloft}  %table of contents control and formatting
+\usepackage{booktabs}
 \usepackage[backend=bibtex, sorting=none, bibstyle=ieee]{biblatex}  %reference manager
 \usepackage[bookmarks=true, hidelinks]{hyperref}
 \usepackage[page]{appendix}  %for appendices
@@ -82,10 +83,10 @@
 % Acknowledgments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\pagenumbering{roman}
-\addcontentsline{toc}{chapter}{Acknowledgments}
-\setcounter{page}{5} % set the page number appropriately based on the number of intro pages
-\input{acknowledgements.tex}
+% \pagenumbering{roman}
+% \addcontentsline{toc}{chapter}{Acknowledgments}
+% \setcounter{page}{5} % set the page number appropriately based on the number of intro pages
+% \input{acknowledgements.tex}
 
 %\addtocontents{toc}{\cftpagenumbersoff{chapter}} 
 
@@ -212,7 +213,7 @@
 % Appendices
 %%%%%%%%%%%%%%%%
 
-\input{appendix.tex}
+% \input{appendix.tex}
 
 %%%%%%%%%%%%%%%%
 % References
@@ -224,13 +225,6 @@
 \end{singlespace}
 
 \addcontentsline{toc}{chapter}{References}  %add References section to Table of Contents
-
-%%%%%%%%%%%%%%%%
-% Vita 
-% Only for PhD students
-% Masters students remove this line
-%%%%%%%%%%%%%%%%
-\input{vita.tex}
 
 
 \end{document}

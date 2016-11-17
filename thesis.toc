@@ -1,10 +1,8 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Acknowledgments}{v}{Doc-Start}
+\contentsline {chapter}{List of Tables}{3}{chapter*.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Tables}{viii}{chapter*.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Figures}{ix}{chapter*.2}
+\contentsline {chapter}{List of Figures}{4}{chapter*.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction and Background}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
@@ -42,16 +40,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Discussion}{11}{chapter.4}
 \defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Interface Discovery}{11}{section.4.1}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\renewcommand {\cftchappresnum }{Appendix }
-\defcounter {refsection}{0}\relax 
-\renewcommand {\cftchapnumwidth }{6em}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Experimental Equipment}{14}{Appendix.1.A}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Data Processing}{15}{Appendix.1.B}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{16}{chapter*.8}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Vita}{17}{chapter*.9}
+\contentsline {chapter}{References}{13}{chapter*.8}

@@ -1,2 +1,6 @@
 \chapter{Discussion}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..
+
+\section{Interface Discovery}
+As Table 3.1 shows, the number of interfaces identified by our automated penetration testing tool is always greater than or equal to what are identified by traditional web crawling.
+
+Such result is in accordance with what is reported by Halford et al. \cite{ref3}, which demonstrates the correctness of our implementation of the interface discovery algorithms. We manually inspected the interfaces exposed by each of the applications and analyzed the procedure that our tool took during interface discovery phase. We identified that there are some cases in which the the web application does not use all the information sent from the client side. PHPCrawler does not have any knowledge of what request is actually processed, so it could generate more request than necessary; however, our interface discovery mechanism is able to send the HTTP requests with only the fields that are known to be handled in the backend, which improves the overall efficiency of penetration testing by reducing the number of unnecessary requests.

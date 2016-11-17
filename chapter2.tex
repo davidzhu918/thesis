@@ -127,7 +127,7 @@ To the opposite of def-use chains, use-def chain is used to keep track of reacha
 \section{String Automaton Construction}
 The second step is to construct estimated input variables by using the result of data flow analysis. The Use-Def chain is particularly useful, because it allows a used variable to be traced back to where it is originally defined.
 
-As string typed inputs are the most common interface inputs of PHP web applications, this section mainly focuses on string estimation. Christensen, Møller, and Schwartzbach \cite{ref1} have proposed a promising algorithm for performing regular expression estimation for a string variable through data flow analysis. In this section a third-party package, dk.brics.automaton, is used. dk.brics.automaton is an open-source Java package implemented based on the research of Christensen, et al. It is language-independent, and supports most commonly used string operations. dk.brics.automaton is able to take flow graph composed of operators and operands (known characters), and generate a definite finite automaton (DFA), which is an estimated regular expression for the analyzed string.
+As string typed inputs are the most common interface inputs of PHP web applications, this section mainly focuses on string estimation. Christensen, Møller, and Schwartzbach \cite{ref4} have proposed a promising algorithm for performing regular expression estimation for a string variable through data flow analysis. In this section a third-party package, dk.brics.automaton, is used. dk.brics.automaton is an open-source Java package implemented based on the research of Christensen, et al. It is language-independent, and supports most commonly used string operations. dk.brics.automaton is able to take flow graph composed of operators and operands (known characters), and generate a definite finite automaton (DFA), which is an estimated regular expression for the analyzed string.
 
 In order to build a complete flow-graph for a string variable, a stack is used to mimic HHVM executions. During HHVM execution, variables and functions are pushed to top of a running stack. Each action (arithmetic operations, string operations, etc.) takes one or more elements popped from the stack, and pushes the new result to stack top. Sometimes when multiple operations are chained together, the stack actions will have a hierarchical form. For example, the stack action for d = (a + b + c) is:
 
@@ -166,7 +166,7 @@ StrToTime \\
 
 \section{Interface Discovery and Grouping}
 
-In this step, variables exposed by the application interface(input variables) are identified and grouped logically. This part of the program implements two interface discovery algorithms proposed by Halfond and Orso \cite{ref2}.
+In this step, variables exposed by the application interface(input variables) are identified and grouped logically. This part of the program implements two interface discovery algorithms proposed by Halfond and Orso \cite{ref3}.
 
 
 % % This is a figure in landscape orientation

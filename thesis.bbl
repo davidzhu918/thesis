@@ -17,94 +17,125 @@
 \endgroup
 
 \sortlist[entry]{none/global/}
-  \entry{ref1}{book}{}
+  \entry{ref1}{article}{}
     \name{author}{2}{}{%
-      {{hash=KBW}{%
-         family={Kernighan},
+      {{hash=SPS}{%
+         family={Srivastava},
+         familyi={S\bibinitperiod},
+         given={P.\bibnamedelima S.},
+         giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=KT}{%
+         family={Kim},
          familyi={K\bibinitperiod},
-         given={Brian\bibnamedelima W.},
-         giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod},
-      }}%
-      {{hash=RDM}{%
-         family={Ritchie},
-         familyi={R\bibinitperiod},
-         given={Dennis\bibnamedelima M.},
-         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {Prentice-Hall, Inc.}%
-    }
-    \strng{namehash}{KBWRDM1}
-    \strng{fullhash}{KBWRDM1}
+    \strng{namehash}{SPSKT1}
+    \strng{fullhash}{SPSKT1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{title}{{The C Programming Language Second Edition}}
-    \field{year}{1988}
+    \field{number}{4}
+    \field{title}{Application of Genetic Algorithm in Software Testing}
+    \field{volume}{3}
+    \field{journaltitle}{International Journal of Software Engineering and Its
+  Applications}
+    \field{month}{11}
+    \field{year}{2009}
   \endentry
 
-  \entry{ref2}{book}{}
-    \name{author}{1}{}{%
-      {{hash=BGP}{%
-         family={Burdell},
-         familyi={B\bibinitperiod},
-         given={George\bibnamedelima P.},
-         giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod},
+  \entry{ref2}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=ZR}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={R.},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Lv},
+         familyi={L\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {Real Books, Inc.}%
-    }
-    \strng{namehash}{BGP1}
-    \strng{fullhash}{BGP1}
+    \keyw{genetic algorithms;neural nets;program testing;genetic
+  algorithm;neural-network;software under test;test case generation;Automatic
+  testing;Automation;Chemical technology;Computer science;Error
+  correction;Fault detection;Genetic algorithms;Neural networks;Software
+  testing;System testing}
+    \strng{namehash}{ZRLS1}
+    \strng{fullhash}{ZRLS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{title}{{Myths and Their Origins}}
-    \field{year}{2016}
+    \field{booktitle}{Dependable Computing, 2007. PRDC 2007. 13th Pacific Rim
+  International Symposium on}
+    \verb{doi}
+    \verb 10.1109/PRDC.2007.63
+    \endverb
+    \field{pages}{97\bibrangedash 100}
+    \field{title}{Neural-Network Based Test Cases Generation Using Genetic
+  Algorithm}
+    \field{month}{12}
+    \field{year}{2007}
   \endentry
 
-  \entry{ref3}{article}{}
+  \entry{ref4}{inproceedings}{}
     \name{author}{3}{}{%
-      {{hash=EA}{%
-         family={Einstein},
-         familyi={E\bibinitperiod},
+      {{hash=CAS}{%
+         family={Christensen},
+         familyi={C\bibinitperiod},
+         given={A.\bibnamedelima S.},
+         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Møller},
+         familyi={M\bibinitperiod},
          given={A.},
          giveni={A\bibinitperiod},
       }}%
-      {{hash=PB}{%
-         family={Podolsky},
-         familyi={P\bibinitperiod},
-         given={B.},
-         giveni={B\bibinitperiod},
-      }}%
-      {{hash=RN}{%
-         family={Rosen},
-         familyi={R\bibinitperiod},
-         given={N.},
-         giveni={N\bibinitperiod},
+      {{hash=SMI}{%
+         family={Schwartzbach},
+         familyi={S\bibinitperiod},
+         given={M.\bibnamedelima I.},
+         giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {American Physical Society}%
-    }
-    \strng{namehash}{EAPBRN1}
-    \strng{fullhash}{EAPBRN1}
+    \strng{namehash}{CASMASMI1}
+    \strng{fullhash}{CASMASMI1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1103/PhysRev.47.777
-    \endverb
-    \field{issue}{10}
-    \field{pages}{777\bibrangedash 780}
-    \field{title}{Can Quantum-Mechanical Description of Physical Reality Be
-  Considered Complete?}
-    \verb{url}
-    \verb http://link.aps.org/doi/10.1103/PhysRev.47.777
-    \endverb
-    \field{volume}{47}
-    \field{journaltitle}{Phys. Rev.}
-    \field{year}{1935}
-    \warn{\item Invalid format of field 'month'}
+    \field{booktitle}{The 10th International Conference on Static Analysis}
+    \field{title}{Precise Analysis of String Expressions}
+    \field{year}{2003}
+  \endentry
+
+  \entry{ref3}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=HWGJ}{%
+         family={Halfond},
+         familyi={H\bibinitperiod},
+         given={W.\bibnamedelima G.\bibnamedelima J.},
+         giveni={W\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim
+  J\bibinitperiod},
+      }}%
+      {{hash=OA}{%
+         family={Orso},
+         familyi={O\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HWGJOA1}
+    \strng{fullhash}{HWGJOA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{The 6th Joint Meeting of the European Software
+  Engineering Conference}
+    \field{title}{Improving Test Case Generation for Web Applications Using
+  Automated Interface Discovery}
+    \field{year}{2007}
   \endentry
 \endsortlist
 \endinput
