@@ -131,7 +131,47 @@ Usually during static analysis, an intra-procedural CFG is constructed for each 
 \section{Testcase Generation Algorithm}
 
 \subsection{Precise String Analysis for Input Generation}
+Typically, users interact with a web application through a user interface (e.g., web page) that allows them to enter input data (e.g., into a form) and submit such data to the web application via HTTP request. The data that users enter are mostly in string literal forms (e.g., name, address, email, etc). Therefore, generating appropriate string inputs automatically during penetration testing is of our particular interest.
 
+The most direct and effective approach for generating test string literal inputs is to check what values the input variable is compared with during input validation in the application backend. Usually after the application receives a request from the client side, it will compare each input field against some specific values or regular expressions, in order to check if the value is valid, or to process data differently according to the given value. For string literal fields, the checker strings/regex are particularly useful, because they provide a good reference for generating our test inputs (the testcase generator only needs to make the input value either match the given value or differ from it). Therefore, in order to generate our test inputs, the fundamental step is to construct the string literals or regular expressions that the inputs are compared with in the application.
+
+Traditional static analysis does not try to get the information of what the value of a variable exactly is. However, in order for our testcase generation tool to construct more plausible input string literals, it is important to estimate the exact value of string literals used to compare with inputs passed into the application. Fortunately, the structure of HipHop Bytecode makes it possible to perform such action. The compiled HHBC for a PHP program models the flow of program execution by using a stack of frames referred to as the "call stack". Each call stack maintains an "evaluation stack", on which data is pushed or popped based on type of HHBC instruction. By using a stack data structure to model this evaluation stack, along with the data flow analysis results that the earlier phase generates, we can partially simulate the actual program's behavior during execution, which is sufficient for us to construct exact string literal values.
+
+\lstset{language=PHP}
+\begin{minipage}{\textwidth}
+\begin{lstlisting}[basicstyle=\small,frame=single]
+<?php
+function create_name($a, $b) {
+  return $a." ".$b;
+}
+$firstname1 = "John";
+$lastname1 = "Doe";
+$firstname2 = "George";
+$lastname2 = "Burdell";
+$name1 = ceate_name($firstname1, $lastname1);
+$name2 = create_name($firstname2, $lastname2);
+$n = $_POST["name"];
+if($n == $name1) {
+  echo "You are a UGA student";
+} else if($n == $name2) {
+  echo "You are a Georgia Tech student";
+} else {
+  echo "Failed";
+}
+?>
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\begin{lstlisting}[basicstyle=\small,frame=single]
+  152: String " "
+  157: CGetL2 0
+  159: Concat
+  160: CGetL 1
+  162: Concat
+  163: RetC
+\end{lstlisting}
+\end{minipage}
 
 \begin{table}
 \begin{tabular}{c}
