@@ -1,150 +1,137 @@
 \chapter{Technical Approach}
 
-\section{System Requirements}
+\section{Background}
+\subsection{Data-flow Analysis}
+In compiler theory, data-flow analysis is a technique for gathering information about the possible set of values calculated at various points in a computer program. The basis for performing data-flow analysis is control flow graph (CFG), which is used to determine those parts of the program to which a particular value assigned to a variable might propagate. In our particular case, we used reaching-definition for each instruction to represent the data flow information. Two techniques applied for performing reaching-definition analysis are \textit{Liveness Analysis} and \textit{Reaching-Def Analysis}.
 
-\begin{enumerate}
-\item Ubuntu 14.04
-\item HHVM 3.10.0
-\item Java Runtime Environment 1.7
-\end{enumerate}
+%CFG and ICFG
+Control Flow Graph (CFG) is a graph representation of all the paths that a computer program might be traversed through during its execution. In a control flow graph, each node represents a basic block - a sequencial piece of a program that does not include jumps or jump targets, while the directed edges represent jumps in the program. Figure 2.1 is the complete control flow graph constructed for an example function t3f1. Each circle represents a basic block (first number in the circle denotes its line number), and the black edges represent the possible jumps that the program can take during execution. It is worth noting that the while loop in t3f1 includes a condition check at line 4, which can be reached from either line 4 (before loop starts) or from line 13 (after last instruction in the loop is finished). Therefore in the CFG there are two nodes representing line 5, with one coming from line 4 and another coming from line 13.
 
-\section{HHVM Bytecode Processing}
-HHVM compiles Hack and PHP into an intermediate bytecode. The intermediate bytecode is processed to build control flow graphs.
+\begin{figure}
+\begin{minipage}{\textwidth}
+\includegraphics[width=0.6\textwidth]{figures/CFG.png}
+\caption{Control Flow Graph for Function t3f1}
+\label{CFG}
+\end{minipage}
+\end{figure}
 
-\subsection{Intra-Procedural Control Flow Graph Construction}
-Control Flow Graph (CFG) is a graph representation of a program that represents all the paths that might be traversed through during its execution, which is the basis for performing variable liveness check and building def-use/use-def chains. The procedure for building a CFG has been extensively investigated and there is a standard algorithm for building CFG from intermediate representations (Hip-Hop byte code, in this case):
+\lstset{language=PHP}
+\begin{minipage}{0.5\textwidth}
+\begin{lstlisting}[frame=single]
+<?php
+function t3f1($c, $d) {
+  $a = 0;
+  $b = 0;
+  while($a <= 5)
+  {
+    if ($b > 5) {
+      $b = 5;
+    }
+    $a = $a + 1;
+    $b = $b + 2;
+  }
+}
+?>
+\end{lstlisting}
+\end{minipage}
+\newline
 
-\subsubsection{Basic Block Partitioning}
-Identify leader statements (i.e. the first statements of basic blocks) by using the following rules:
+%liveness analysis and reaching-def analysis
+As one of the two techniques used for performing reaching-definition analysis, liveness analysis is to calculate, at instruction level, the variables that may be potentially read before their next write, that is, the variables that are live at the exit from each program point. In the given example, variable b is first defined at line 4; it is also defined at line 8 and 11 in the main loop. Therefore, var b is said to be "alive" from line 4 to line 8, and from line 11 back to line 8. Given liveness analysis output, def-use chains can be constructed for each variable. The DU chain represents the exact places where a variable definition is later used in other instructions. The DU chains in t3f1 are shown as black dotted edges in Figure 2.1.
 
-\begin{enumerate}
-\item Identify leader statements
-\begin{enumerate}
-\item The first statement is a leader
-\item Any statement that is the target of a branch statement is a leader (for most intermediate languages these are statements with an associated label)
-\item  Any statement that immediately follows a branch or return statement is a leader
-\end{enumerate}
-\item The basic block corresponding to a leader consists of the leader, plus all statements up to but not including the next leader or up to the end of the program
-\end{enumerate}
+To the contrary of liveness analysis, reaching-def analysis calculates the possible definition instructions for a given use variable. Reaching-def analysis helps generate use-def chains for each variable used in a program. The UD chains for variables in t3f1 are shown as red dotted edges in Figure 2.1.
 
-\subsubsection{Control Flow Graph Construction}
-The basic block corresponding to a leader consists of the leader, plus all statements up to but not including the next leader or up to the end of the program
-\begin{enumerate}
-\item There is a branch from the last statement of B1 to the first statement of B2, or
-\item Control flow can fall through from B1 to B2 because
-\begin{enumerate}
-\item B2 immediately follows B1, and
-\item B1 does not end with an unconditional branch
-\end{enumerate}
-\end{enumerate}
+\subsection{HipHop Bytecode}
+\blindtext
 
-\subsection{Data Flow Analysis}
-In order to keep track of how each variable is used in the program, it is critical to perform data flow analysis, which outputs def-use chains and use-def chains, both of which are critical to the later stages of the project.
-\subsubsection{Def-Use Chains and Liveness Analysis}
-Def-use chain is used to keep information about reaching definition of a variable. Specifically, for each use of a variable x, its def-use chain is a list of the definitions of x reaching that use. Liveness Analysis is used to get def-use chains.
-\begin{itemize}
-\item At each program point:
-\begin{itemize}
-\item Which variables contain values computed earlier and needed later – they are said to be live
-\end{itemize}
-
-\item For instruction I:
-\begin{itemize}
-\item in[I]: live variables at program point before I
-\item out[i]: live variables at program point after I
-\end{itemize}
-
-\item For a basic block B:
-\begin{itemize}
-\item in[B]: live variables at beginning of B
-\item out[B]: live variables at end of B
-\end{itemize}
-
-\item DU[I] = out[I] – in[I]
-\item Note:
-\begin{itemize}
-\item in[I] = in[B] for first instruction of B
-\item out[I] = out[B] for last instruction of B
-\end{itemize}
-
-\end{itemize}
+\section{Inter-procedural CFG Construction}
+Usually during static analysis, an intra-procedural CFG is constructed for each individual function before all intra-procedural CFGs are combined into one inter-procedural CFG (ICFG) that represents the control flow for the entire program. ICFG is a combination of all individual functions and a function call graph (CG), which is a graph representation of function dependencies in a program, in which functions are represented as nodes and function invokations are represented as directed edges. Since one variable defined/used in any function can be used/defined in other functions, extra work needs to be done in order to expand a variable's DU and UD chains in ICFG. Algorithm 1 shows the construction of DU and UD chains in ICFG given individual CFGs and CG.
 
 \algdef{SE}[UNTIL]{Until}{EndUntil}[1]{\algorithmicuntil\ #1\ \algorithmicrepeat}{\algorithmicend\ \algorithmicuntil}%
 \begin{algorithm}
-\caption{Liveness Calculation in CFG}
-\begin{algorithmic}
-\For{Each instruction $I$}
-	\State{in[I] $\gets$ $\emptyset$}
-	\State{out[I] $\gets$ $\emptyset$}
+\caption{Dataflow Expansion in ICFG}
+\begin{algorithmic}[1]
+\Require 
+  \State $CG$: call graph of the application program; 
+  \State $CFGS$: CFGs for all functions in the program
+
+\Comment{main}
+\Procedure{Dataflow Expansion}{}
+\State{$visited$ $\gets$ $\emptyset$}
+\For{Each $CFG$ in $CFGS$}
+  \For{Each instruction $I$ in $CFG$}
+    \If{$I$ has KILL variable $kv$}
+      \State\Call{completeDefUse}{$CFG$, $I$, $kv$, $visited$}
+    \EndIf
+  \EndFor
 \EndFor
-\Until{no change in set}
-	\For{Each instruction $I$}
-		\State{in[I] $\gets$ (out[I] - def[I]) $\cup$ use[I]}
-	\EndFor
-	\For{Each basic block $B$}
-		\State{out[B] $\gets$ $\cup$ in[S] (S $\in$ Successor[B])}
-	\EndFor
-\EndUntil
+
+\State{$visited$ $\gets$ $\emptyset$}
+
+\For{Each $CFG$ in $CFGS$}
+  \For{Each instruction $I$ in $CFG$}
+    \If{$I$ has GEN variable $gv$}
+      \State\Call{completeUseDef}{$CFG$, $I$, $gv$, $visited$}
+    \EndIf
+  \EndFor
+\EndFor
+\EndProcedure
+
+\algstore{alg1}
 \end{algorithmic}
 \end{algorithm}
-
-\subsubsection{Use-Def Chains and Reaching-definition Analysis}
-To the opposite of def-use chains, use-def chain is used to keep track of reachable definitions for a use of a variable. Reaching-definition analysis is the method to get use-def chains.
-\begin{itemize}
-\item For instruction I:
-\begin{itemize}
-\item in[I]: reaching definitions going into I
-\item in[I]: reaching definitions going into I
-\item in[I]: reaching definitions going into I
-\item kill[I]: definition at I
-\end{itemize}
-\item For a basic block B:
-\begin{itemize}
-\item in[B]: reaching definitions going into B
-\item out[B]: reaching definitions coming out of B
-\end{itemize}
-\item UD[I] = in[I] – out[I]
-\end{itemize}
 
 \begin{algorithm}
-\caption{Reaching-def Calculation in CFG}
-\begin{algorithmic}
-\For{Each instruction $I$}
-	\State{in[I] $\gets$ $\emptyset$}
-	\State{out[I] $\gets$ $\emptyset$}
-\EndFor
-\Until{no change in set}
-	\For{Each instruction $I$}
-		\State{out[I] $\gets$ (in[I] - kill[I]) $\cup$ gen[I]}
-	\EndFor
-	\For{Each basic block $B$}
-		\State{in[B] $\gets$ $\cup$ out[P] (P $\in$ Predecessor[B])}
-	\EndFor
-\EndUntil
+\begin{algorithmic}[1]
+\algrestore{alg1}
+\Function{completeDefUse}{$cfg$, $instr$, $var$, $visited$}
+  \If{$instr$ in $visited$}
+    \State\Return{$instr.duchain$}
+  \EndIf
+  \For{Each Use $use$ in $instr.duchain$}
+    \If{$use$ is a function call site}
+      \State Get the callee function $targetfunction$
+      \State Get the function parameter $targetvar$ in $targetfunction$ that corresponds to $use.var$
+      \State Get the instruction $targetInstr$ that initiates $targetvar$ in $targetfunction$
+      \State $newuses$ $\gets$ \Call{completeDefUse}{$targetfunction.CFG$, $targetInstr$, $targetvar$, $visited$}
+      \State $instr.duchain$ $\gets$ ($instr.duchain$ - $use$) $\cup$ $newuses$
+    \EndIf
+  \EndFor
+  \State $visited$ $\gets$ $visited$ $\cup$ $instr$
+  \State\Return{$instr.duchain$}
+\EndFunction
+\algstore{alg1}
 \end{algorithmic}
 \end{algorithm}
 
-\section{String Automaton Construction}
-The second step is to construct estimated input variables by using the result of data flow analysis. The Use-Def chain is particularly useful, because it allows a used variable to be traced back to where it is originally defined.
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg1}
+\Function{completeUseDef}{cfg, instr, var, visited}
+  \If{$instr$ in $visited$}
+    \State\Return{$instr.udchain$}
+  \EndIf
+  \For{Each Def $def$ in $instr.udchain$}
+    \If{$def$ is a function entry site}
+      \State Get all the functions $callerfuncs$ that calls current function
+      \For{Each function $callerfunc$ in $callerfuncs$}
+        \State Get the function parameter $sourcevar$ in $callerfunc$ that corresponds to $def.var$
+        \State Get the instruction $sourceInstr$ in $callerfunc$ that passes $sourcevar$ to callee stack
+        \State $newdefs$ $\gets$ \Call{completeUseDef}{$callerfunc.CFG$, $sourceInstr$, $sourcevar$, $visited$}
+        \State $instr.udchain$ $\gets$ ($instr.udchain$ - $def$) $\cup$ $newdefs$
+      \EndFor
+    \EndIf
+  \EndFor
+  \State $visited$ $\gets$ $visited$ $\cup$ $instr$
+  \State\Return{$instr.duchain$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
-As string typed inputs are the most common interface inputs of PHP web applications, this section mainly focuses on string estimation. Christensen, Møller, and Schwartzbach \cite{ref4} have proposed a promising algorithm for performing regular expression estimation for a string variable through data flow analysis. In this section a third-party package, dk.brics.automaton, is used. dk.brics.automaton is an open-source Java package implemented based on the research of Christensen, et al. It is language-independent, and supports most commonly used string operations. dk.brics.automaton is able to take flow graph composed of operators and operands (known characters), and generate a definite finite automaton (DFA), which is an estimated regular expression for the analyzed string.
+\section{Testcase Generation Algorithm}
 
-In order to build a complete flow-graph for a string variable, a stack is used to mimic HHVM executions. During HHVM execution, variables and functions are pushed to top of a running stack. Each action (arithmetic operations, string operations, etc.) takes one or more elements popped from the stack, and pushes the new result to stack top. Sometimes when multiple operations are chained together, the stack actions will have a hierarchical form. For example, the stack action for d = (a + b + c) is:
+\subsection{Precise String Analysis for Input Generation}
 
-\begin{forest}
-  [Set% root
-    [var d]
-    [Plus% root of \section{•}
-      [var c]
-      [Plus
-        [var b]
-        [Get
-          [var a]
-        ]
-      ]
-    ]
-  ]
-\end{forest}
 
 \begin{table}
 \begin{tabular}{c}
@@ -164,14 +151,9 @@ StrToTime \\
 \end{tabular}
 \end{table}
 
-\section{Interface Discovery and Grouping}
+\subsection{Array Content Propagation}
+\blindtext
 
+\section{Interface Discovery Algorithm}
 In this step, variables exposed by the application interface(input variables) are identified and grouped logically. This part of the program implements two interface discovery algorithms proposed by Halfond and Orso \cite{ref3}.
 
-
-% % This is a figure in landscape orientation
-% \begin{sidewaysfigure}
-% \includegraphics[width=\textwidth]{figures/exampleFigure.png}
-% \caption{This is another example Figure, rotated to landscape orientation.}
-% \label{LandscapeFigure}
-% \end{sidewaysfigure}
