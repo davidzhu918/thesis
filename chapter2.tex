@@ -135,11 +135,13 @@ Typically, users interact with a web application through a user interface (e.g.,
 
 The most direct and effective approach for generating test string literal inputs is to check what values the input variable is compared with during input validation in the application backend. Usually after the application receives a request from the client side, it will compare each input field against some specific values or regular expressions, in order to check if the value is valid, or to process data differently according to the given value. For string literal fields, the checker strings/regex are particularly useful, because they provide a good reference for generating our test inputs (the testcase generator only needs to make the input value either match the given value or differ from it). Therefore, in order to generate our test inputs, the fundamental step is to construct the string literals or regular expressions that the inputs are compared with in the application.
 
-Traditional static analysis does not try to get the information of what the value of a variable exactly is. However, in order for our testcase generation tool to construct more plausible input string literals, it is important to estimate the exact value of string literals used to compare with inputs passed into the application. Fortunately, the structure of HipHop Bytecode makes it possible to perform such action. The compiled HHBC for a PHP program models the flow of program execution by using a stack of frames referred to as the "call stack". Each call stack maintains an "evaluation stack", on which data is pushed or popped based on type of HHBC instruction. By using a stack data structure to model this evaluation stack, along with the data flow analysis results that the earlier phase generates, we can partially simulate the actual program's behavior during execution, which is sufficient for us to construct exact string literal values.
+Conventional static analysis does not try to get the information of what the value of a variable exactly is. However, in order for our testcase generation tool to construct more plausible input string literals, it is important to estimate the exact value of string literals used to compare with inputs passed into the application. Fortunately, the structure of HipHop Bytecode makes it possible to perform such action. The compiled HHBC for a PHP program models the flow of program execution by using a stack of frames referred to as the "call stack". Each call stack maintains an "evaluation stack", on which data is pushed or popped based on type of HHBC instruction. By using a stack data structure to model this evaluation stack, along with the data flow analysis results that the earlier phase generates, we can partially simulate the actual program's behavior during execution, which is sufficient for us to construct exact string literal values.
+
+Listing \ref{lst:label1} shows a simple PHP program that uses a $create\_name$ function to build full names from first and last names. In line 3, first name is first concatenated with a space and then concatenated with last name. Listing \ref{lst:label2} is the HHBC generated for line 3 after compilation, which shows how the act of concatenation in line 3 is performed by HHVM. HHVM starts the series of actions by declaring a String (a space) (line 152), which is pushed to the evaluation stack; next, HHVM looks for the variable with ID 0 (CGetL2 0 in line 157), and pushes it onto the stack; then, when it comes to the "Concat" instruction, HHVM takes the top two elements from the stack, append the topmost value (which is the space) to the back of the second topmost value (the variable with ID 0), and pushes the result onto the stack, thus completing the first concatenation. The rest of the HHVM actions are similar to what have happend: HHVM pushes the variable with ID 1 to the stack, pops the top two elements, concatenates them, and finally pushes the result to the stack.
 
 \lstset{language=PHP}
 \begin{minipage}{\textwidth}
-\begin{lstlisting}[basicstyle=\small,frame=single]
+\begin{lstlisting}[caption={Sample PHP Code and Compiled HHBC Snippet},label={lst:label1},basicstyle=\small,frame=single]
 <?php
 function create_name($a, $b) {
   return $a." ".$b;
@@ -163,7 +165,7 @@ if($n == $name1) {
 \end{minipage}
 
 \begin{minipage}{\textwidth}
-\begin{lstlisting}[basicstyle=\small,frame=single]
+\begin{lstlisting}[caption={HHBC Snippet for line 3},label={lst:label2},basicstyle=\small,frame=single]
   152: String " "
   157: CGetL2 0
   159: Concat
@@ -173,7 +175,20 @@ if($n == $name1) {
 \end{lstlisting}
 \end{minipage}
 
+Given the fact that HHBC instructions also represent stack operations, we can take advantage of such property to build the string literal by mocking HHVM stack operations. In our implementation, a global stack data structure is maintained by the static analyzer. After each basic block is created, all the instructions in the basic block are simulated to work on the stack. The result is an ActionNode tree. ActionNode is a data structure that represents the specific HHVM "Action" performed by the given instruction. For example, "Concat" and "String" instructions represent "Concatenation" and "Declaration" actions respectively. Essentially each instruction should correspond to an action node and different instruction operators should be represented by distinct action nodes. However, given the large number of PHP string operations, we only implemented ActionNodes for certain commonly used operations (Table \ref{tab:a}). ActionTree is a hierarchical representation of ActionNode actions upon each other. In the HHBC sample given by Listing \ref{lst:label2}, the ActionNode tree looks like the following:
+
+\begin{forest}
+  [Concat,
+    [Concat
+      [Var 0]
+      [Space]
+    ]
+    [Var 1]
+  ]
+\end{forest}
+
 \begin{table}
+\centering
 \begin{tabular}{c}
 Supported PHP String Operations \\
 \hline
@@ -187,8 +202,25 @@ Trim \\
 Split \\
 Replace \\
 StrToTime \\
-\label{Supported PHP string operations}
 \end{tabular}
+\caption{Supported PHP string operations}
+\label{tab:a}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{c}
+Supported PHP Core Operations \\
+\hline
+Function \\
+Declare \\
+ArrayDeclare \\
+Set \\
+Get \\
+Load \\
+\end{tabular}
+\caption{Supported PHP Core operations}
+\label{tab:b}
 \end{table}
 
 \subsection{Array Content Propagation}

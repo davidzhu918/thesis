@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  18 NOV 2016 02:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  22 NOV 2016 02:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1768,7 +1768,7 @@ l.20 \end{titlepage}
 the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.35 ...\numberline {3.2}Results}{12}{section.3.2}
+l.35 ...\numberline {3.2}Results}{13}{section.3.2}
                                                    [1
 
 ])
@@ -1816,7 +1816,7 @@ name{page.2}) has been already used, duplicate ignored
 l.1 \chapter
             {Technical Approach} [2]
 Chapter 2.
-<figures/CFG.png, id=172, 313.17pt x 706.64pt>
+<figures/CFG.png, id=176, 313.17pt x 706.64pt>
 File: figures/CFG.png Graphic file (type png)
  <use figures/CFG.png>
 Package pdftex.def Info: figures/CFG.png used on input line 12.
@@ -1882,26 +1882,38 @@ cmm/m/it/12 sourceInstr$\OT1/ptm/m/n/12 ,
 
 [6] [7] [8]
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 143.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 145.
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 144.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 141--164
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 143--166
 []$[]$ 
  []
 
 [9]
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 165--175
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 167--177
 []$[]$ 
  []
 
-[10]) (./chapter3.tex [11]
-Chapter 3.
-) (./chapter4.tex [12
+[10] [11pdfTeX warning (ext4): destination with the same identifier (name{table
+.2.1}) has been already used, duplicate ignored
 
-] [13pdfTeX warning (ext4): destination with the same identifier (name{table.3.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.228 
+      ]) (./chapter3.tex [12pdfTeX warning (ext4): destination with the same id
+entifier (name{table.2.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1 \chapter
+            {Empirical Evaluation}]
+Chapter 3.
+) (./chapter4.tex [13
+
+] [14pdfTeX warning (ext4): destination with the same identifier (name{table.3.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1909,11 +1921,11 @@ Chapter 3.
 l.1 \chapter
             {Discussion}]
 Chapter 4.
-) (./chapter5.tex [14
+) (./chapter5.tex [15
 
 ]
 Chapter 5.
-) [15
+) [16
 
 ]
 Overfull \hbox (0.48814pt too wide) in paragraph at lines 230--230
@@ -1930,7 +1942,7 @@ Overfull \hbox (138.85147pt too wide) in paragraph at lines 230--230
 \OT1/ptm/m/n/12 us-ing au-to-mated in-ter-face dis-cov-ery,'' in |   [],
  []
 
-[16
+[17
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 236.
@@ -1945,13 +1957,13 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43711 strings out of 494447
- 905049 string characters out of 6166766
- 1385175 words of memory out of 5000000
- 46385 multiletter control sequences out of 15000+600000
- 19187 words of font info for 43 fonts, out of 8000000 for 9000
+ 44620 strings out of 494447
+ 928381 string characters out of 6166766
+ 1385303 words of memory out of 5000000
+ 47291 multiletter control sequences out of 15000+600000
+ 20201 words of font info for 45 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 61i,9n,69p,10385b,3184s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 124i,9n,153p,10385b,3184s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/lo
 cal/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
@@ -1959,10 +1971,10 @@ r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
 /usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/
 local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (23 pages, 190420 bytes).
+Output written on thesis.pdf (24 pages, 193958 bytes).
 PDF statistics:
- 321 PDF objects out of 1000 (max. 8388607)
- 285 compressed objects within 3 object streams
- 90 named destinations out of 1000 (max. 500000)
+ 334 PDF objects out of 1000 (max. 8388607)
+ 297 compressed objects within 3 object streams
+ 93 named destinations out of 1000 (max. 500000)
  202 words of extra memory for PDF output out of 10000 (max. 10000000)
 
