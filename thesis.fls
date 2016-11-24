@@ -410,6 +410,12 @@ INPUT chapter4.tex
 INPUT chapter4.tex
 INPUT chapter5.tex
 INPUT chapter5.tex
+INPUT appendix.tex
+INPUT appendix.tex
+INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
+INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT thesis.aux
 INPUT ./thesis.out
 INPUT ./thesis.out

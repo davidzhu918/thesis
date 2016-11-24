@@ -175,17 +175,194 @@ if($n == $name1) {
 \end{lstlisting}
 \end{minipage}
 
-Given the fact that HHBC instructions also represent stack operations, we can take advantage of such property to build the string literal by mocking HHVM stack operations. In our implementation, a global stack data structure is maintained by the static analyzer. After each basic block is created, all the instructions in the basic block are simulated to work on the stack. The result is an ActionNode tree. ActionNode is a data structure that represents the specific HHVM "Action" performed by the given instruction. For example, "Concat" and "String" instructions represent "Concatenation" and "Declaration" actions respectively. Essentially each instruction should correspond to an action node and different instruction operators should be represented by distinct action nodes. However, given the large number of PHP string operations, we only implemented ActionNodes for certain commonly used operations (Table \ref{tab:a}). ActionTree is a hierarchical representation of ActionNode actions upon each other. In the HHBC sample given by Listing \ref{lst:label2}, the ActionNode tree looks like the following:
+Given the fact that HHBC instructions also represent stack operations, we can take advantage of such property to build the string literal by mocking HHVM stack operations. In our implementation, a global stack data structure is maintained by the static analyzer. After each basic block is created, all the instructions in the basic block are simulated to work on the stack. The result is an ActionNode tree. ActionNode is a data structure that represents the specific HHVM "Action" performed by the given instruction. For example, "Concat" and "String" instructions represent "Concatenation" and "Declaration" actions respectively. Different type of ActionNode. Essentially each instruction should correspond to an action node and different instruction operators should be represented by distinct action nodes. However, given the large number of PHP string operations, we only implemented ActionNodes for certain commonly used operations (Table \ref{tab:a}). ActionTree is a hierarchical representation of ActionNode actions upon each other. In the HHBC sample given by Listing \ref{lst:label2}, the ActionNode tree looks like the following:
 
 \begin{forest}
   [Concat,
     [Concat
-      [Var 0]
-      [Space]
+      [Get 0
+        [Declare firstname]
+      ]
+      [Declare \textvisiblespace]
     ]
-    [Var 1]
+    [Get 1
+      [Declare lastname]
+    ]
   ]
 \end{forest}
+
+As shown in the tree diagram above, Concat ActionNode always has two children, while Get ActionNode has one child, and Declare ActionNode has zero. Different ActionNodes have different number of children, depending on their specific actions.
+
+In the last step, static analyzer uses the action trees and a modified Java String Analyzer (JSA) library to construct string lietral values. Java String Analyzer (JSA) \cite{ref3} is a tool that uses static analysis information to predict the possible values of string expressions in Java programs. JSA is consisted of several phases, each transforming the program into a different form. The phases are separated into two parts: The front-end and the back-end. At the front-end, JSA performs Java language specific static analysis and generates a Flow Graph for each string expression; at the back-end, JSA takes Flow Graphs as its input and converts them in to finite-state automata.
+
+Flow Graph is language-independent, and can be constructed directly from data flow analysis(liveness and reaching-def analysis). Therefore, in our implementation, the static analyzer uses Def-Use chains and Use-Def chains along with the action trees to build flow graph for each string expression; the flow graph is then fed into the backend of JSA library, which will take care the rest of string analysis and generate a finite-state automaton to represent the string expression.
+
+\begin{algorithm}
+\caption{Flow Graph Construction Algorithm}
+\begin{algorithmic}[1]
+\Require 
+  \State $CG$: Call graph of the application program
+  \State $ICFGS$: Inter-procedural CFG with complete Def-Use and Use-Def chains
+
+\Comment{main}
+\Procedure{Flow Graph Construction}{}
+\State Group functions in $CG$ into Strongly Connected Components $sccGraph$
+\State Get the topological ordering of SCCs, $sccList$ , in $sccGraph$
+\State{$continue$ $\gets$ $true$}
+
+\Until{continue is $false$}
+  \For{Each SCC $scc$ in $sccList$}
+    \For{Each Function $function$ in $scc$}
+      \State $cfg$ $\gets$ $function.cfg$
+      \For{Each BasicBlock $block$ in $cfg.getTopologicalSortedBlocks$}
+        \State $success$ $\gets$ \Call{stringAnalysis}{$block$, $ICFG$}
+        \If{$success$ is $true$}
+          \State $continue$ $\gets$ $false$
+        \EndIf
+      \EndFor
+    \EndFor
+  \EndFor
+\EndUntil
+
+\EndProcedure
+
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+\Function{stringAnalysis}{$basicblock$, $ICFG$}
+  \State Build ActionTrees $trees$ from $basicblock$.instructions
+  \For{Each ActionTree $tree$ in $trees$}
+    \State $success$ $\gets$ \Call{buildFlowGraph}{$tree$.root, $ICFG$}
+    \If{not $success$}
+      \State \Return $false$
+    \EndIf
+  \EndFor
+  \State \Return $true$
+\EndFunction
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+% New definitions
+\algnewcommand\algorithmicswitch{\textbf{switch}}
+\algnewcommand\algorithmiccase{\textbf{case}}
+
+% New "environments"
+\algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]{\algorithmicswitch\ #1\ \algorithmicdo}{\algorithmicend\ \algorithmicswitch}%
+\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1}{\algorithmicend\ \algorithmiccase}%
+\algtext*{EndSwitch}%
+\algtext*{EndCase}%
+
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+\Function{buildFlowGraph}{$ActionNode$, $ICFG$}
+  \State Initialize FlowGraph $flowgraph$
+  \State Initialize FlowGraphNode $fgnode$
+  \For{Each child node $childnode$ of $ActionNode$.children}
+    \State $success$ $\gets$ \Call{buildFlowGraph}{$childnode$, $ICFG$}
+    \If{not $success$}
+      \State \Return $false$
+    \EndIf
+    \State $flowgraph$ $\gets$ $childenode$.flowgraph
+    \State Add all nodes in $childnoded$.flowgraph to $flowgraph$
+  \EndFor
+
+  \Switch{$ActionNode.type$}
+    \Case{$Declare$}
+      \State $v$ $\gets$ $ActionNode$.value
+      \State $at$ $\gets$ $v$.\Call{getAutomaton}{}
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addInitializationNode}{$at$}
+    \EndCase
+
+    \Case{$Get$}
+      \State $instr$ $\gets$ $ActionNode$.instr
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{};
+      \For{Each Definition $def$ in $instr$.usedefchain}
+        \State Get the ActionNode $setNode$ corresponding to $def$
+        \State $setFlowGraph$ $\gets$ $setNode$.flowgraph
+        \State Add all nodes in $setFlowGraph$ to $flowgraph$
+
+        \State Set Def-Use relationship between $setNode$.fgnode and $fgnode$
+
+      \EndFor
+    \EndCase
+
+    \Case{$Set$}
+    \State ActionNode $toSet$ $\gets$ $ActionNode$.child
+    \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{$toSet$}
+    \State Set Def-Use relationship between $toSet$ and $fgnode$
+    \EndCase
+
+    \Case{$Load$}
+
+    \EndCase
+
+    \algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+
+    \Case{$Function$}
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{}
+      \State Get called function name $funcName$
+      \State $retCFG$ $\gets$ $ICFG$.\Call{getCFG}{$funcName$}
+      \State $retBlocks$ $\gets$ $retCFG$.\Call{getRetBlocks}{}
+      \State $vars$ $\gets$ $ActionNode$.children
+      \State $varMap$ $\gets$ Associate each variable in $vars$ with its formal parameter in function pointed by $funcName$
+      \For{Each BasicBlock $retBlock$ in $retBlocks$}
+        \State $retActionNode$ $\gets$ $retBlock$.\Call{getLastActionNode}{}
+        \State $fg\_copy$ $\gets$ \Call{copyFlowGraph}{$retActionNode$.flowgraph, $varMap$}
+        \State Add all nodes in $fg\_copy$ to $flowgraph$
+        \State Set Def-Use relationship between the last node in $fg\_copy$ and $fgnode$
+      \EndFor
+
+      \Comment{change type to Default}
+      \State $ActionNode$.type $\gets$ $Default$
+      \State Clear $ActionNode$.children
+    \EndCase
+
+    \Case{$Default$}
+      \State do nothing
+    \EndCase
+
+    \Comment{For string specific actions, refer to Appendix \ref{appendix:algorithm}}
+
+  \EndSwitch
+
+  \Return $true$
+\EndFunction
+% \algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{table}
+\centering
+\begin{tabular}{c}
+Supported PHP Core Operations \\
+\hline
+Function \\
+Declare \\
+ArrayDeclare \\
+Set \\
+Get \\
+Load \\
+\end{tabular}
+\caption{Supported PHP Core operations}
+\label{tab:b}
+\end{table}
+
 
 \begin{table}
 \centering
@@ -205,22 +382,6 @@ StrToTime \\
 \end{tabular}
 \caption{Supported PHP string operations}
 \label{tab:a}
-\end{table}
-
-\begin{table}
-\centering
-\begin{tabular}{c}
-Supported PHP Core Operations \\
-\hline
-Function \\
-Declare \\
-ArrayDeclare \\
-Set \\
-Get \\
-Load \\
-\end{tabular}
-\caption{Supported PHP Core operations}
-\label{tab:b}
 \end{table}
 
 \subsection{Array Content Propagation}

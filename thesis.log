@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  22 NOV 2016 02:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  23 NOV 2016 00:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1768,7 +1768,7 @@ l.20 \end{titlepage}
 the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.35 ...\numberline {3.2}Results}{13}{section.3.2}
+l.35 ...\numberline {3.2}Results}{16}{section.3.2}
                                                    [1
 
 ])
@@ -1816,7 +1816,7 @@ name{page.2}) has been already used, duplicate ignored
 l.1 \chapter
             {Technical Approach} [2]
 Chapter 2.
-<figures/CFG.png, id=176, 313.17pt x 706.64pt>
+<figures/CFG.png, id=199, 313.17pt x 706.64pt>
 File: figures/CFG.png Graphic file (type png)
  <use figures/CFG.png>
 Package pdftex.def Info: figures/CFG.png used on input line 12.
@@ -1897,13 +1897,13 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 167--177
 []$[]$ 
  []
 
-[10] [11pdfTeX warning (ext4): destination with the same identifier (name{table
-.2.1}) has been already used, duplicate ignored
+[10] [11] [12] [13] [14pdfTeX warning (ext4): destination with the same identif
+ier (name{table.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.228 
-      ]) (./chapter3.tex [12pdfTeX warning (ext4): destination with the same id
+l.389 
+      ]) (./chapter3.tex [15pdfTeX warning (ext4): destination with the same id
 entifier (name{table.2.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1911,21 +1911,28 @@ entifier (name{table.2.2}) has been already used, duplicate ignored
 l.1 \chapter
             {Empirical Evaluation}]
 Chapter 3.
-) (./chapter4.tex [13
+[16
 
-] [14pdfTeX warning (ext4): destination with the same identifier (name{table.3.
-1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 \chapter
-            {Discussion}]
+] [17] [18]) (./chapter4.tex [19]
 Chapter 4.
-) (./chapter5.tex [15
+) (./chapter5.tex [20
 
 ]
 Chapter 5.
-) [16
+) (./appendix.tex [21
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+ [22
+
+]
+Appendix A.
+[23
+
+]
+Appendix B.
+) [24
 
 ]
 Overfull \hbox (0.48814pt too wide) in paragraph at lines 230--230
@@ -1942,7 +1949,7 @@ Overfull \hbox (138.85147pt too wide) in paragraph at lines 230--230
 \OT1/ptm/m/n/12 us-ing au-to-mated in-ter-face dis-cov-ery,'' in |   [],
  []
 
-[17
+[25
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 236.
@@ -1951,19 +1958,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 236.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 236.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 236.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 844DA4B727B6D93CE7A2AC035392094C;1431.
+(rerunfilecheck)             Checksum: 39D053622824557846237FAC6162148D;1767.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44620 strings out of 494447
- 928381 string characters out of 6166766
- 1385303 words of memory out of 5000000
- 47291 multiletter control sequences out of 15000+600000
- 20201 words of font info for 45 fonts, out of 8000000 for 9000
+ 45159 strings out of 494447
+ 943056 string characters out of 6166766
+ 1386293 words of memory out of 5000000
+ 47806 multiletter control sequences out of 15000+600000
+ 22334 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 124i,9n,153p,10385b,3184s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 134i,10n,160p,10385b,3184s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/lo
 cal/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
@@ -1971,10 +1978,10 @@ r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
 /usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/
 local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (24 pages, 193958 bytes).
+Output written on thesis.pdf (32 pages, 209146 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 297 compressed objects within 3 object streams
- 93 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 407 PDF objects out of 1000 (max. 8388607)
+ 361 compressed objects within 4 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 242 words of extra memory for PDF output out of 10000 (max. 10000000)
 
