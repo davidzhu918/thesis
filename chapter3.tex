@@ -7,7 +7,7 @@ The experimental subjects used in the study is consisted of three student-develo
 \subsection{Tools Used in Evaluation}
 We evaluate the effectiveness of our interface discovery mechanism by comparing the number and quality of interfaces that it generates with the interfaces extracted by web crawlers. The web crawler tool that we used is OpenWebSpider, an open-sourced framework for crawling/spidering websites. For each interface output, we check if any of the HTTP requests in this output is processed in the backend program.
 
-We evaluate the effectiveness of our test request generation mechanism by comparing it against another PHP test case generation tool, PHPUnit. For each HTTP request, a set of possible values is generated for all of the fields in this request, creating a set of test HTTP requests, which are then sent to the server. Then the final code coverage in the backend is recorded.
+We evaluate the effectiveness of our test request generation mechanism by comparing it against naive random test case generation. For each HTTP request, a set of possible values is generated for all of the fields in this request, creating a set of test HTTP requests, which are then sent to the server. The final code coverage of the backend PHP code is recorded.
 
 \section{Results}
 
@@ -25,6 +25,10 @@ Form Inputs
 All required fields are checked against a regular expression. The only optional field (telephone) is not checked against any regex or string variables.
 
 Our penetration testing tool successfully identified all the fields (required and optional). It generated test cases for all the required variables from the given regex expression. For the "telephone" field, which is optional, our testing tool did not infer any information from static analysis, therefore would be producing random strings for this field during testing.
+
+Code coverage achieved: 82.92\%
+
+Code coverage by random generator: 60.98\%
 
 %example%
 \subsection{Fancy Hotel (CS4400 Class Project)}
@@ -54,6 +58,10 @@ Form Inputs
 
 Our penetration tool successfully identified all request (or interface) parameters and their names (usn, psw, con\_pwd, email). It identified the regular expression that was used to check valid email and username in the program and used this information to construct test cases for the email and username fields.
 
+Code coverage achieved: 91.67\%
+
+Code coverage by random generator: 66.67\%
+
 \subsubsection{Room Search}
 Form Inputs
 \begin{itemize}
@@ -72,17 +80,30 @@ Note
 
 Our penetration tester successfully identified all the required fields as well as the session information not exposed by the interface itself. Furthermore, static analysis has inferred key information about both start\_date and end\_date. For start\_date, output test cases include "2015\-08\-31" and "2015\-08\-01"; for end\_date, output test cases include "2016\-01\-31". 
 
+Code coverage achieved: 95.23\%
+
+Code coverage by random generator: 85.71\%
+
 %example%
 \subsection{Paycheck Calculator}
 A basic PHP web application that takes in one input (salary) and shows how much tax should be deduced.
 
 Form Inputs
 \begin{itemize}
-  \item salary (float)
+  \item salary (integer)
 \end{itemize}
 
-Our penetration tool successfully identified the interface. Static analysis generated all possible levels of salary which covered 100\% of application code.
+Our penetration tool successfully identified the interface. Static analysis generated all possible numeric values that are used, either directly or indirectly, to compare with the interface input variable in the program.
 
+Code coverage achieved: 85.37\%
 
+Code coverage by random generator: 82.92\%
 
+\begin{figure}
+\begin{minipage}{\textwidth}
+\includegraphics[width=\textwidth]{figures/result.png}
+\caption{Code Coverage Performance Comparison with Naive Testcase Generator}
+\label{fig:result}
+\end{minipage}
+\end{figure}
 

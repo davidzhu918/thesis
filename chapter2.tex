@@ -5,13 +5,13 @@
 In compiler theory, data-flow analysis is a technique for gathering information about the possible set of values calculated at various points in a computer program. The basis for performing data-flow analysis is control flow graph (CFG), which is used to determine those parts of the program to which a particular value assigned to a variable might propagate. In our particular case, we used reaching-definition for each instruction to represent the data flow information. Two techniques applied for performing reaching-definition analysis are \textit{Liveness Analysis} and \textit{Reaching-Def Analysis}.
 
 %CFG and ICFG
-Control Flow Graph (CFG) is a graph representation of all the paths that a computer program might be traversed through during its execution. In a control flow graph, each node represents a basic block - a sequencial piece of a program that does not include jumps or jump targets, while the directed edges represent jumps in the program. Figure 2.1 is the complete control flow graph constructed for an example function t3f1. Each circle represents a basic block (first number in the circle denotes its line number), and the black edges represent the possible jumps that the program can take during execution. It is worth noting that the while loop in t3f1 includes a condition check at line 4, which can be reached from either line 4 (before loop starts) or from line 13 (after last instruction in the loop is finished). Therefore in the CFG there are two nodes representing line 5, with one coming from line 4 and another coming from line 13.
+Control Flow Graph (CFG) is a graph representation of all the paths that a computer program might be traversed through during its execution. In a control flow graph, each node represents a basic block - a sequencial piece of a program that does not include jumps or jump targets, while the directed edges represent jumps in the program. Figure \ref{fig:CFG} is the complete control flow graph constructed for an example function t3f1. Each circle represents a basic block (first number in the circle denotes its line number), and the black edges represent the possible jumps that the program can take during execution. It is worth noting that the while loop in t3f1 includes a condition check at line 4, which can be reached from either line 4 (before loop starts) or from line 13 (after last instruction in the loop is finished). Therefore in the CFG there are two nodes representing line 5, with one coming from line 4 and another coming from line 13.
 
 \begin{figure}
 \begin{minipage}{\textwidth}
 \includegraphics[width=0.6\textwidth]{figures/CFG.png}
 \caption{Control Flow Graph for Function t3f1}
-\label{CFG}
+\label{fig:CFG}
 \end{minipage}
 \end{figure}
 
@@ -302,7 +302,7 @@ Flow Graph is language-independent, and can be constructed directly from data fl
     \EndCase
 
     \Case{$Load$}
-
+      \Comment{Explained in section \ref{array_prop}}
     \EndCase
 
     \algstore{alg2}
@@ -385,7 +385,11 @@ StrToTime \\
 \end{table}
 
 \subsection{Array Content Propagation}
-\blindtext
+\label{array_prop}
+In addition to being initialized directly, it is common that string literals are also declared in arrays and maps, therefore it is important to capture all possible string literal values in such data structures. Suppose $arr$ is an array with n string literals in a program, and at some point in the program, a variable $a$ is assigned to an element in $arr$ at a particular position $i$. The actual value of $a$ depends on index $i$, but in our case, what we care is all the \textit{possible} string literal values $a$ could be assigned, and therefore index is no longer relevant. Instead, we assume that \textit{all} the n elements in $arr$ can be assigned to $a$. The same idea applies for maps as well.
+
+Nested array and map is another consideration when extracting string literals. If an element is retrived by indexing into the first level of a two-dimensional array, then only the elements at the first level are extracted. Similarly, if the array is indexed at its second level, then only those elements at the second level are retrieved. In our implementation, each LOAD ActionNode represents going one more level into an array/map. Therefore a recursive array unpacking procedure is applied at LOAD ActionNodes on flow graph construction, by which the action node can get to the correct level of an array/map and copy all the string literals at that level into its own data structure.
+
 
 \section{Interface Discovery Algorithm}
 In this step, variables exposed by the application interface(input variables) are identified and grouped logically. This part of the program implements two interface discovery algorithms proposed by Halfond and Orso \cite{ref3}.
