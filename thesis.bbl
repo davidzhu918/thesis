@@ -69,8 +69,7 @@
     \strng{fullhash}{ZRLS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{booktitle}{Dependable Computing, 2007. PRDC 2007. 13th Pacific Rim
-  International Symposium on}
+    \field{booktitle}{13th Pacific Rim International Symposium}
     \verb{doi}
     \verb 10.1109/PRDC.2007.63
     \endverb
@@ -116,26 +115,58 @@
       {{hash=HWGJ}{%
          family={Halfond},
          familyi={H\bibinitperiod},
-         given={W.\bibnamedelima G.\bibnamedelima J.},
+         given={William G.\bibnamedelima J.},
          giveni={W\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim
   J\bibinitperiod},
       }}%
       {{hash=OA}{%
          family={Orso},
          familyi={O\bibinitperiod},
-         given={A.},
+         given={Alessandro},
          giveni={A\bibinitperiod},
       }}%
     }
+    \list{publisher}{1}{%
+      {ACM}%
+    }
+    \keyw{interface extraction, web-application testing}
     \strng{namehash}{HWGJOA1}
     \strng{fullhash}{HWGJOA1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{booktitle}{The 6th Joint Meeting of the European Software
+    \field{booktitle}{The the 6th Joint Meeting of the European Software
   Engineering Conference}
+    \verb{doi}
+    \verb 10.1145/1287624.1287646
+    \endverb
+    \field{isbn}{9781595938114}
+    \field{pages}{145\bibrangedash 154}
+    \field{series}{ESEC--FSE '07}
     \field{title}{Improving Test Case Generation for Web Applications Using
   Automated Interface Discovery}
+    \verb{url}
+    \verb http://doi.acm.org/10.1145/1287624.1287646
+    \endverb
+    \list{location}{1}{%
+      {Dubrovnik, Croatia}%
+    }
     \field{year}{2007}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
+
+  \entry{ref5}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=F}{%
+         family={Facebook},
+         familyi={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{F1}
+    \strng{fullhash}{F1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{HipHop Bytecode Specification v1 revision 18}
+    \field{year}{2014}
   \endentry
 \endsortlist
 \endinput

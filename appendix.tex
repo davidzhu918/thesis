@@ -6,10 +6,119 @@
 
 %Begin individual appendices, separated as chapters
 
-\chapter{Experimental Equipment}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\chapter{Experiment Equipment}
+\begin{enumerate}
+\item Ubuntu 14.04
+\item Java Runtime Environment 1.7
+\item PHP 5.5
+\item HHVM 3.10.0
+\item OpenWebSpider
+\end{enumerate}
 
-\chapter{Data Processing}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\chapter{Function \textit{buildFlowGraph} Continued}
+\label{appendix:algorithm}
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+    \Case{$Concat$}
+      \State ActionNode $toConcat1$ $\gets$ $ActionNode$.children[0]
+      \State ActionNode $toConcat2$ $\gets$ $ActionNode$.children[1]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addConcatenationNode}{}
+      \State Set Def-Use relationship between $toConcat1$ and $fgnode$
+      \State Set Def-Use relationship between $toConcat2$ and $fgnode$
+    \EndCase
+
+    \Case{$Comp$}
+      \State ActionNode $toCmp1$ $\gets$ $ActionNode$.children[0]
+      \State ActionNode $toCmp2$ $\gets$ $ActionNode$.children[1]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addBinaryNode}{AssertEqualsOperation}
+      \State Set Def-Use relationship between $toCmp1$ and $fgnode$
+      \State Set Def-Use relationship between $toComp2$ and $fgnode$
+    \EndCase
+
+    \Case{$Substr$}
+      \State ActionNode $substrNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{SubstringOperation}
+      \State Set Def-Use relationship between $substrNode$ and $fgnode$
+    \EndCase
+
+    \Case{$ToUppserCase$}
+      \State ActionNode $upperNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{ToUpperOperation}
+      \State Set Def-Use relationship between $upperNode$ and $fgnode$
+    \EndCase
+
+    \Case{$ToLowerCase$}
+      \State ActionNode $lowerNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{ToLowerOperation}
+      \State Set Def-Use relationship between $lowerNode$ and $fgnode$
+    \EndCase
+
+    \Case{$Reverse$}
+      \State ActionNode $reverseNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{ReverseOperation}
+      \State Set Def-Use relationship between $reverseNode$ and $fgnode$
+    \EndCase
+
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+    \Case{$Trim$}
+      \State ActionNode $trimNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{TrimOperation}
+      \State Set Def-Use relationship between $trimNode$ and $fgnode$
+    \EndCase
+
+    \Case{$Split$}
+      \State ActionNode $splitNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{SplitOperation}
+      \State Set Def-Use relationship between $splitNode$ and $fgnode$
+    \EndCase
+
+    \Case{$StringToTime$}
+      \State ActionNode $timeNode$ $\gets$ $ActionNode$.children[0]
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addUnaryNode}{ToTimeFormatOperation}
+      \State Set Def-Use relationship between $timeNode$ and $fgnode$
+    \EndCase
+
+  \EndSwitch
+
+  \Return $true$
+\EndFunction
+% \algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\chapter{Experiment Interface Output}
+\label{appendix:output}
+
+\lstset{
+  numbers=none,
+  firstnumber=1,
+  numberfirstline=true
+}
+
+\section{Email Sender}
+\lstinputlisting[language={}]{texts/email-sender.txt}
+
+\section{Fancy Hotel - User Login}
+\lstinputlisting[language={}]{texts/fancyhotel-login.txt}
+
+\section{Fancy Hotel - User Registration}
+\lstinputlisting[language={}]{texts/fancyhotel-registration.txt}
+
+\section{Fancy Hotel - Room Search}
+\lstinputlisting[language={}]{texts/fancyhotel-roomsearch.txt}
+
+\section{Paycheck Calculator}
+\lstinputlisting[language={}]{texts/paycheck.txt}
 
 \end{appendices}

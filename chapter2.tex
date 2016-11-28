@@ -1,152 +1,367 @@
 \chapter{Technical Approach}
 
-\section{System Requirements}
+\section{Background}
+\subsection{Data-flow Analysis}
+In compiler theory, data-flow analysis is a technique for gathering information about the possible set of values calculated at various points in a computer program. The basis for performing data-flow analysis is control flow graph (CFG), which is used to determine those parts of the program to which a particular value assigned to a variable might propagate. In our particular case, we used reaching-definition for each instruction to represent the data flow information. Two techniques applied for performing reaching-definition analysis are \textit{Liveness Analysis} and \textit{Reaching-Def Analysis}.
 
-\begin{enumerate}
-\item Ubuntu 14.04
-\item HHVM 3.10.0
-\item Java Runtime Environment 1.7
-\end{enumerate}
+%CFG and ICFG
+Control Flow Graph (CFG) is a graph representation of all the paths that a computer program might be traversed through during its execution. In a control flow graph, each node represents a basic block - a sequential piece of a program that does not include jumps or jump targets, while the directed edges represent jumps in the program. Figure \ref{fig:CFG} is the complete control flow graph constructed for an example function t3f1. Each circle represents a basic block (first number in the circle denotes its line number), and the black edges represent the possible jumps that the program can take during execution. It is worth noting that the while loop in t3f1 includes a condition check at line 4, which can be reached from either line 4 (before loop starts) or from line 13 (after last instruction in the loop is finished). Therefore in the CFG there are two nodes representing line 5, with one coming from line 4 and another coming from line 13.
 
-\section{HHVM Bytecode Processing}
-HHVM compiles Hack and PHP into an intermediate bytecode. The intermediate bytecode is processed to build control flow graphs.
+\begin{figure}
+\begin{minipage}{\textwidth}
+\includegraphics[width=0.6\textwidth]{figures/CFG.png}
+\caption{Control Flow Graph for Function t3f1}
+\label{fig:CFG}
+\end{minipage}
+\end{figure}
 
-\subsection{Intra-Procedural Control Flow Graph Construction}
-Control Flow Graph (CFG) is a graph representation of a program that represents all the paths that might be traversed through during its execution, which is the basis for performing variable liveness check and building def-use/use-def chains. The procedure for building a CFG has been extensively investigated and there is a standard algorithm for building CFG from intermediate representations (Hip-Hop byte code, in this case):
+\lstset{language=PHP}
+\begin{minipage}{0.5\textwidth}
+\begin{lstlisting}[frame=single]
+<?php
+function t3f1($c, $d) {
+  $a = 0;
+  $b = 0;
+  while($a <= 5)
+  {
+    if ($b > 5) {
+      $b = 5;
+    }
+    $a = $a + 1;
+    $b = $b + 2;
+  }
+}
+?>
+\end{lstlisting}
+\end{minipage}
+\newline
 
-\subsubsection{Basic Block Partitioning}
-Identify leader statements (i.e. the first statements of basic blocks) by using the following rules:
+%liveness analysis and reaching-def analysis
+As one of the two techniques used for performing reaching-definition analysis, liveness analysis is to calculate, at instruction level, the variables that may be potentially read before their next write, that is, the variables that are live at the exit from each program point. In the given example, variable b is first defined at line 4; it is also defined at line 8 and 11 in the main loop. Therefore, var b is said to be "alive" from line 4 to line 8, and from line 11 back to line 8. Given liveness analysis output, def-use chains can be constructed for each variable. The DU chain represents the exact places where a variable definition is later used in other instructions. The DU chains in t3f1 are shown as black dotted edges in Figure 2.1.
 
-\begin{enumerate}
-\item Identify leader statements
-\begin{enumerate}
-\item The first statement is a leader
-\item Any statement that is the target of a branch statement is a leader (for most intermediate languages these are statements with an associated label)
-\item  Any statement that immediately follows a branch or return statement is a leader
-\end{enumerate}
-\item The basic block corresponding to a leader consists of the leader, plus all statements up to but not including the next leader or up to the end of the program
-\end{enumerate}
+To the contrary of liveness analysis, reaching-def analysis calculates the possible definition instructions for a given use variable. Reaching-def analysis helps generate use-def chains for each variable used in a program. The UD chains for variables in t3f1 are shown as red dotted edges in Figure 2.1.
 
-\subsubsection{Control Flow Graph Construction}
-The basic block corresponding to a leader consists of the leader, plus all statements up to but not including the next leader or up to the end of the program
-\begin{enumerate}
-\item There is a branch from the last statement of B1 to the first statement of B2, or
-\item Control flow can fall through from B1 to B2 because
-\begin{enumerate}
-\item B2 immediately follows B1, and
-\item B1 does not end with an unconditional branch
-\end{enumerate}
-\end{enumerate}
+\subsection{HipHop VM and HipHop Bytecode}
+HipHop Virtual Machine (HHVM) is an open-source virtual machine based on just-in-time (JIT) compilation that serves as an execution engine for the PHP and Hack programming languages. During HHVM execution, PHP or Hack code is first transformed into an intermediate code format, HipHip bytecode (HHBC), for the consumption by JIT compilers \cite{ref5}. We found HHBC an ideal code representation for PHP programs, because unlike PHP native statements, which only describes \textit{what} actions to perform, HHBC is consisted by instructions, which tell the machine \textit{how} those actions should be performed. Specifically, declare, load and set operations for variables are explicitly stated in HHBC, which makes it easy to build CFGs and perform data analysis. Moreover, HHBC introduces the concept of "execution stack", a stack space upon which data are processed by pushing and popping according to different operations. Such concept could greatly help with the string analysis that we use for testcase generation, which will be discussed in \ref{stringanalysis}.
 
-\subsection{Data Flow Analysis}
-In order to keep track of how each variable is used in the program, it is critical to perform data flow analysis, which outputs def-use chains and use-def chains, both of which are critical to the later stages of the project.
-\subsubsection{Def-Use Chains and Liveness Analysis}
-Def-use chain is used to keep information about reaching definition of a variable. Specifically, for each use of a variable x, its def-use chain is a list of the definitions of x reaching that use. Liveness Analysis is used to get def-use chains.
-\begin{itemize}
-\item At each program point:
-\begin{itemize}
-\item Which variables contain values computed earlier and needed later – they are said to be live
-\end{itemize}
-
-\item For instruction I:
-\begin{itemize}
-\item in[I]: live variables at program point before I
-\item out[i]: live variables at program point after I
-\end{itemize}
-
-\item For a basic block B:
-\begin{itemize}
-\item in[B]: live variables at beginning of B
-\item out[B]: live variables at end of B
-\end{itemize}
-
-\item DU[I] = out[I] – in[I]
-\item Note:
-\begin{itemize}
-\item in[I] = in[B] for first instruction of B
-\item out[I] = out[B] for last instruction of B
-\end{itemize}
-
-\end{itemize}
+\section{Inter-procedural CFG Construction}
+Usually during static analysis, an intra-procedural CFG is constructed for each individual function before all intra-procedural CFGs are combined into one inter-procedural CFG (ICFG) that represents the control flow for the entire program. ICFG is a combination of all individual functions and a function call graph (CG), which is a graph representation of function dependencies in a program, in which functions are represented as nodes and function invocations are represented as directed edges. Since one variable defined/used in any function can be used/defined in other functions, extra work needs to be done in order to expand a variable's DU and UD chains in ICFG. Algorithm 1 shows the construction of DU and UD chains in ICFG given individual CFGs and CG.
 
 \algdef{SE}[UNTIL]{Until}{EndUntil}[1]{\algorithmicuntil\ #1\ \algorithmicrepeat}{\algorithmicend\ \algorithmicuntil}%
 \begin{algorithm}
-\caption{Liveness Calculation in CFG}
-\begin{algorithmic}
-\For{Each instruction $I$}
-	\State{in[I] $\gets$ $\emptyset$}
-	\State{out[I] $\gets$ $\emptyset$}
+\caption{Dataflow Expansion in ICFG}
+\begin{algorithmic}[1]
+\Require 
+  \State $CG$: call graph of the application program; 
+  \State $CFGS$: CFGs for all functions in the program
+
+\Comment{main}
+\Procedure{Dataflow Expansion}{}
+\State{$visited$ $\gets$ $\emptyset$}
+\For{Each $CFG$ in $CFGS$}
+  \For{Each instruction $I$ in $CFG$}
+    \If{$I$ has KILL variable $kv$}
+      \State\Call{completeDefUse}{$CFG$, $I$, $kv$, $visited$}
+    \EndIf
+  \EndFor
 \EndFor
-\Until{no change in set}
-	\For{Each instruction $I$}
-		\State{in[I] $\gets$ (out[I] - def[I]) $\cup$ use[I]}
-	\EndFor
-	\For{Each basic block $B$}
-		\State{out[B] $\gets$ $\cup$ in[S] (S $\in$ Successor[B])}
-	\EndFor
-\EndUntil
+
+\State{$visited$ $\gets$ $\emptyset$}
+
+\For{Each $CFG$ in $CFGS$}
+  \For{Each instruction $I$ in $CFG$}
+    \If{$I$ has GEN variable $gv$}
+      \State\Call{completeUseDef}{$CFG$, $I$, $gv$, $visited$}
+    \EndIf
+  \EndFor
+\EndFor
+\EndProcedure
+
+\algstore{alg1}
 \end{algorithmic}
 \end{algorithm}
-
-\subsubsection{Use-Def Chains and Reaching-definition Analysis}
-To the opposite of def-use chains, use-def chain is used to keep track of reachable definitions for a use of a variable. Reaching-definition analysis is the method to get use-def chains.
-\begin{itemize}
-\item For instruction I:
-\begin{itemize}
-\item in[I]: reaching definitions going into I
-\item in[I]: reaching definitions going into I
-\item in[I]: reaching definitions going into I
-\item kill[I]: definition at I
-\end{itemize}
-\item For a basic block B:
-\begin{itemize}
-\item in[B]: reaching definitions going into B
-\item out[B]: reaching definitions coming out of B
-\end{itemize}
-\item UD[I] = in[I] – out[I]
-\end{itemize}
 
 \begin{algorithm}
-\caption{Reaching-def Calculation in CFG}
-\begin{algorithmic}
-\For{Each instruction $I$}
-	\State{in[I] $\gets$ $\emptyset$}
-	\State{out[I] $\gets$ $\emptyset$}
-\EndFor
-\Until{no change in set}
-	\For{Each instruction $I$}
-		\State{out[I] $\gets$ (in[I] - kill[I]) $\cup$ gen[I]}
-	\EndFor
-	\For{Each basic block $B$}
-		\State{in[B] $\gets$ $\cup$ out[P] (P $\in$ Predecessor[B])}
-	\EndFor
-\EndUntil
+\begin{algorithmic}[1]
+\algrestore{alg1}
+\Function{completeDefUse}{$cfg$, $instr$, $var$, $visited$}
+  \If{$instr$ in $visited$}
+    \State\Return{$instr.duchain$}
+  \EndIf
+  \For{Each Use $use$ in $instr.duchain$}
+    \If{$use$ is a function call site}
+      \State Get the callee function $targetfunction$
+      \State Get the function parameter $targetvar$ in $targetfunction$ that corresponds to $use.var$
+      \State Get the instruction $targetInstr$ that initiates $targetvar$ in $targetfunction$
+      \State $newuses$ $\gets$ \Call{completeDefUse}{$targetfunction.CFG$, $targetInstr$, $targetvar$, $visited$}
+      \State $instr.duchain$ $\gets$ ($instr.duchain$ - $use$) $\cup$ $newuses$
+    \EndIf
+  \EndFor
+  \State $visited$ $\gets$ $visited$ $\cup$ $instr$
+  \State\Return{$instr.duchain$}
+\EndFunction
+\algstore{alg1}
 \end{algorithmic}
 \end{algorithm}
 
-\section{String Automaton Construction}
-The second step is to construct estimated input variables by using the result of data flow analysis. The Use-Def chain is particularly useful, because it allows a used variable to be traced back to where it is originally defined.
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg1}
+\Function{completeUseDef}{cfg, instr, var, visited}
+  \If{$instr$ in $visited$}
+    \State\Return{$instr.udchain$}
+  \EndIf
+  \For{Each Def $def$ in $instr.udchain$}
+    \If{$def$ is a function entry site}
+      \State Get all the functions $callerfuncs$ that calls current function
+      \For{Each function $callerfunc$ in $callerfuncs$}
+        \State Get the function parameter $sourcevar$ in $callerfunc$ that corresponds to $def.var$
+        \State Get the instruction $sourceInstr$ in $callerfunc$ that passes $sourcevar$ to callee stack
+        \State $newdefs$ $\gets$ \Call{completeUseDef}{$callerfunc.CFG$, $sourceInstr$, $sourcevar$, $visited$}
+        \State $instr.udchain$ $\gets$ ($instr.udchain$ - $def$) $\cup$ $newdefs$
+      \EndFor
+    \EndIf
+  \EndFor
+  \State $visited$ $\gets$ $visited$ $\cup$ $instr$
+  \State\Return{$instr.duchain$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
 
-As string typed inputs are the most common interface inputs of PHP web applications, this section mainly focuses on string estimation. Christensen, Møller, and Schwartzbach \cite{ref4} have proposed a promising algorithm for performing regular expression estimation for a string variable through data flow analysis. In this section a third-party package, dk.brics.automaton, is used. dk.brics.automaton is an open-source Java package implemented based on the research of Christensen, et al. It is language-independent, and supports most commonly used string operations. dk.brics.automaton is able to take flow graph composed of operators and operands (known characters), and generate a definite finite automaton (DFA), which is an estimated regular expression for the analyzed string.
+\section{Testcase Generation Algorithm}
 
-In order to build a complete flow-graph for a string variable, a stack is used to mimic HHVM executions. During HHVM execution, variables and functions are pushed to top of a running stack. Each action (arithmetic operations, string operations, etc.) takes one or more elements popped from the stack, and pushes the new result to stack top. Sometimes when multiple operations are chained together, the stack actions will have a hierarchical form. For example, the stack action for d = (a + b + c) is:
+\subsection{Precise String Analysis for Input Generation} \label{stringanalysis}
+Typically, users interact with a web application through a user interface (e.g., web page) that allows them to enter input data (e.g., into a form) and submit such data to the web application via HTTP request. The data that users enter are mostly in string literal forms (e.g., name, address, email, etc). Therefore, generating appropriate string inputs automatically during penetration testing is of our particular interest.
+
+The most direct and effective approach for generating test string literal inputs is to check what values the input variable is compared with during input validation in the application back-end. Usually after the application receives a request from the client side, it will compare each input field against some specific values or regular expressions, in order to check if the value is valid, or to process data differently according to the given value. For string literal fields, the checker strings/regex are particularly useful, because they provide a good reference for generating our test inputs (the testcase generator only needs to make the input value either match the given value or differ from it). Therefore, in order to generate our test inputs, the fundamental step is to construct the string literals or regular expressions that the inputs are compared with in the application.
+
+Conventional static analysis does not try to get the information of what the value of a variable exactly is. However, in order for our testcase generation tool to construct more plausible input string literals, it is important to estimate the exact value of string literals used to compare with inputs passed into the application. Fortunately, the structure of HipHop Bytecode makes it possible to perform such action. The compiled HHBC for a PHP program models the flow of program execution by using a stack of frames referred to as the "call stack". Each call stack maintains an "evaluation stack", on which data is pushed or popped based on type of HHBC instruction. By using a stack data structure to model this evaluation stack, along with the data flow analysis results that the earlier phase generates, we can partially simulate the actual program's behavior during execution, which is sufficient for us to construct exact string literal values.
+
+Listing \ref{lst:label1} shows a simple PHP program that uses a $create\_name$ function to build full names from first and last names. In line 3, first name is first concatenated with a space and then concatenated with last name. Listing \ref{lst:label2} is the HHBC generated for line 3 after compilation, which shows how the act of concatenation in line 3 is performed by HHVM. HHVM starts the series of actions by declaring a String (a space) (line 152), which is pushed to the evaluation stack; next, HHVM looks for the variable with ID 0 (CGetL2 0 in line 157), and pushes it onto the stack; then, when it comes to the "Concat" instruction, HHVM takes the top two elements from the stack, append the topmost value (which is the space) to the back of the second topmost value (the variable with ID 0), and pushes the result onto the stack, thus completing the first concatenation. The rest of the HHVM actions are similar to what have happened: HHVM pushes the variable with ID 1 to the stack, pops the top two elements, concatenates them, and finally pushes the result to the stack.
+
+\lstset{language=PHP}
+\begin{minipage}{\textwidth}
+\begin{lstlisting}[caption={Sample PHP Code and Compiled HHBC Snippet},label={lst:label1},basicstyle=\small,frame=single]
+<?php
+function create_name($a, $b) {
+  return $a." ".$b;
+}
+$firstname1 = "John";
+$lastname1 = "Doe";
+$firstname2 = "George";
+$lastname2 = "Burdell";
+$name1 = ceate_name($firstname1, $lastname1);
+$name2 = create_name($firstname2, $lastname2);
+$n = $_POST["name"];
+if($n == $name1) {
+  echo "You are a UGA student";
+} else if($n == $name2) {
+  echo "You are a Georgia Tech student";
+} else {
+  echo "Failed";
+}
+?>
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\begin{lstlisting}[caption={HHBC Snippet for line 3},label={lst:label2},basicstyle=\small,frame=single]
+  152: String " "
+  157: CGetL2 0
+  159: Concat
+  160: CGetL 1
+  162: Concat
+  163: RetC
+\end{lstlisting}
+\end{minipage}
+
+Given the fact that HHBC instructions also represent stack operations, we can take advantage of such property to build the string literal by mocking HHVM stack operations. In our implementation, a global stack data structure is maintained by the static analyzer. After each basic block is created, all the instructions in the basic block are simulated to work on the stack. The result is an ActionNode tree. ActionNode is a data structure that represents the specific HHVM "Action" performed by the given instruction. For example, "Concat" and "String" instructions represent "Concatenation" and "Declaration" actions respectively. Different type of ActionNode. Essentially each instruction should correspond to an action node and different instruction operators should be represented by distinct action nodes. However, given the large number of PHP string operations, we only implemented ActionNodes for certain commonly used operations (Table \ref{tab:a}). ActionTree is a hierarchical representation of ActionNode actions upon each other. In the HHBC sample given by Listing \ref{lst:label2}, the ActionNode tree looks like the following:
 
 \begin{forest}
-  [Set% root
-    [var d]
-    [Plus% root of \section{•}
-      [var c]
-      [Plus
-        [var b]
-        [Get
-          [var a]
-        ]
+  [Concat,
+    [Concat
+      [Get 0
+        [Declare firstname]
       ]
+      [Declare \textvisiblespace]
+    ]
+    [Get 1
+      [Declare lastname]
     ]
   ]
 \end{forest}
 
+As shown in the tree diagram above, Concat ActionNode always has two children, while Get ActionNode has one child, and Declare ActionNode has zero. Different ActionNodes have different number of children, depending on their specific actions.
+
+In the last step, static analyzer uses the action trees and a modified Java String Analyzer (JSA) library to construct string literal values. Java String Analyzer (JSA) \cite{ref3} is a tool that uses static analysis information to predict the possible values of string expressions in Java programs. JSA is consisted of several phases, each transforming the program into a different form. The phases are separated into two parts: The front-end and the back-end. At the front-end, JSA performs Java language specific static analysis and generates a Flow Graph for each string expression; at the back-end, JSA takes Flow Graphs as its input and converts them in to finite-state automata.
+
+Flow Graph is language-independent, and can be constructed directly from data flow analysis(liveness and reaching-def analysis). Therefore, in our implementation, the static analyzer uses Def-Use chains and Use-Def chains along with the action trees to build flow graph for each string expression; the flow graph is then fed into the back-end of JSA library, which will take care the rest of string analysis and generate a finite-state automaton to represent the string expression.
+
+\begin{algorithm}
+\caption{Flow Graph Construction Algorithm}
+\begin{algorithmic}[1]
+\Require 
+  \State $CG$: Call graph of the application program
+  \State $ICFGS$: Inter-procedural CFG with complete Def-Use and Use-Def chains
+
+\Comment{main}
+\Procedure{Flow Graph Construction}{}
+\State Group functions in $CG$ into Strongly Connected Components $sccGraph$
+\State Get the topological ordering of SCCs, $sccList$ , in $sccGraph$
+\State{$continue$ $\gets$ $true$}
+
+\Until{continue is $false$}
+  \For{Each SCC $scc$ in $sccList$}
+    \For{Each Function $function$ in $scc$}
+      \State $cfg$ $\gets$ $function.cfg$
+      \For{Each BasicBlock $block$ in $cfg.getTopologicalSortedBlocks$}
+        \State $success$ $\gets$ \Call{stringAnalysis}{$block$, $ICFG$}
+        \If{$success$ is $true$}
+          \State $continue$ $\gets$ $false$
+        \EndIf
+      \EndFor
+    \EndFor
+  \EndFor
+\EndUntil
+
+\EndProcedure
+
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+\Function{stringAnalysis}{$basicblock$, $ICFG$}
+  \State Build ActionTrees $trees$ from $basicblock$.instructions
+  \For{Each ActionTree $tree$ in $trees$}
+    \State $success$ $\gets$ \Call{buildFlowGraph}{$tree$.root, $ICFG$}
+    \If{not $success$}
+      \State \Return $false$
+    \EndIf
+  \EndFor
+  \State \Return $true$
+\EndFunction
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
+% New definitions
+\algnewcommand\algorithmicswitch{\textbf{switch}}
+\algnewcommand\algorithmiccase{\textbf{case}}
+
+% New "environments"
+\algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]{\algorithmicswitch\ #1\ \algorithmicdo}{\algorithmicend\ \algorithmicswitch}%
+\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1}{\algorithmicend\ \algorithmiccase}%
+\algtext*{EndSwitch}%
+\algtext*{EndCase}%
+
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+\Function{buildFlowGraph}{$ActionNode$, $ICFG$}
+  \State Initialize FlowGraph $flowgraph$
+  \State Initialize FlowGraphNode $fgnode$
+  \For{Each child node $childnode$ of $ActionNode$.children}
+    \State $success$ $\gets$ \Call{buildFlowGraph}{$childnode$, $ICFG$}
+    \If{not $success$}
+      \State \Return $false$
+    \EndIf
+    \State $flowgraph$ $\gets$ $childenode$.flowgraph
+    \State Add all nodes in $childnoded$.flowgraph to $flowgraph$
+  \EndFor
+
+  \Switch{$ActionNode.type$}
+    \Case{$Declare$}
+      \State $v$ $\gets$ $ActionNode$.value
+      \State $at$ $\gets$ $v$.\Call{getAutomaton}{}
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addInitializationNode}{$at$}
+    \EndCase
+
+    \Case{$Get$}
+      \State $instr$ $\gets$ $ActionNode$.instr
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{};
+      \For{Each Definition $def$ in $instr$.usedefchain}
+        \State Get the ActionNode $setNode$ corresponding to $def$
+        \State $setFlowGraph$ $\gets$ $setNode$.flowgraph
+        \State Add all nodes in $setFlowGraph$ to $flowgraph$
+
+        \State Set Def-Use relationship between $setNode$.fgnode and $fgnode$
+
+      \EndFor
+    \EndCase
+
+    \Case{$Set$}
+    \State ActionNode $toSet$ $\gets$ $ActionNode$.child
+    \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{$toSet$}
+    \State Set Def-Use relationship between $toSet$ and $fgnode$
+    \EndCase
+
+    \Case{$Load$}
+      \Comment{Explained in section \ref{array_prop}}
+    \EndCase
+
+    \algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\algrestore{alg2}
+
+    \Case{$Function$}
+      \State $fgnode$ $\gets$ $flowgraph$.\Call{addAssignmentNode}{}
+      \State Get called function name $funcName$
+      \State $retCFG$ $\gets$ $ICFG$.\Call{getCFG}{$funcName$}
+      \State $retBlocks$ $\gets$ $retCFG$.\Call{getRetBlocks}{}
+      \State $vars$ $\gets$ $ActionNode$.children
+      \State $varMap$ $\gets$ Associate each variable in $vars$ with its formal parameter in function pointed by $funcName$
+      \For{Each BasicBlock $retBlock$ in $retBlocks$}
+        \State $retActionNode$ $\gets$ $retBlock$.\Call{getLastActionNode}{}
+        \State $fg\_copy$ $\gets$ \Call{copyFlowGraph}{$retActionNode$.flowgraph, $varMap$}
+        \State Add all nodes in $fg\_copy$ to $flowgraph$
+        \State Set Def-Use relationship between the last node in $fg\_copy$ and $fgnode$
+      \EndFor
+
+      \Comment{change type to Default}
+      \State $ActionNode$.type $\gets$ $Default$
+      \State Clear $ActionNode$.children
+    \EndCase
+
+    \Case{$Default$}
+      \State do nothing
+    \EndCase
+
+    \Comment{For string specific actions, refer to Appendix \ref{appendix:algorithm}}
+
+\algstore{alg2}
+\end{algorithmic}
+\end{algorithm}
+
+
 \begin{table}
+\centering
+\begin{tabular}{c}
+Supported PHP Core Operations \\
+\hline
+Function \\
+Declare \\
+ArrayDeclare \\
+Set \\
+Get \\
+Load \\
+\end{tabular}
+\caption{Supported PHP Core operations}
+\label{tab:b}
+\end{table}
+
+
+\begin{table}
+\centering
 \begin{tabular}{c}
 Supported PHP String Operations \\
 \hline
@@ -160,18 +375,18 @@ Trim \\
 Split \\
 Replace \\
 StrToTime \\
-\label{Supported PHP string operations}
 \end{tabular}
+\caption{Supported PHP string operations}
+\label{tab:a}
 \end{table}
 
-\section{Interface Discovery and Grouping}
+\subsection{Array Content Propagation}
+\label{array_prop}
+In addition to being initialized directly, it is common that string literals are also declared in arrays and maps, therefore it is important to capture all possible string literal values in such data structures. Suppose $arr$ is an array with n string literals in a program, and at some point in the program, a variable $a$ is assigned to an element in $arr$ at a particular position $i$. The actual value of $a$ depends on index $i$, but in our case, what we care is all the \textit{possible} string literal values $a$ could be assigned, and therefore index is no longer relevant. Instead, we assume that \textit{all} the n elements in $arr$ can be assigned to $a$. The same idea applies for maps as well.
 
+Nested array and map is another consideration when extracting string literals. If an element is retrieved by indexing into the first level of a two-dimensional array, then only the elements at the first level are extracted. Similarly, if the array is indexed at its second level, then only those elements at the second level are retrieved. In our implementation, each LOAD ActionNode represents going one more level into an array/map. Therefore a recursive array unpacking procedure is applied at LOAD ActionNodes on flow graph construction, by which the action node can get to the correct level of an array/map and copy all the string literals at that level into its own data structure.
+
+
+\section{Interface Discovery Algorithm}
 In this step, variables exposed by the application interface(input variables) are identified and grouped logically. This part of the program implements two interface discovery algorithms proposed by Halfond and Orso \cite{ref3}.
 
-
-% % This is a figure in landscape orientation
-% \begin{sidewaysfigure}
-% \includegraphics[width=\textwidth]{figures/exampleFigure.png}
-% \caption{This is another example Figure, rotated to landscape orientation.}
-% \label{LandscapeFigure}
-% \end{sidewaysfigure}
