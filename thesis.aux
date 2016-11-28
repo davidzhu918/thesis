@@ -35,7 +35,7 @@
 \citation{ref4}
 \abx@aux@cite{ref4}
 \abx@aux@segm{0}{0}{ref4}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction and Background}{1}{chapter.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \citation{ref3}
@@ -44,44 +44,83 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {2}Technical Approach}{3}{chapter.2}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.1}System Requirements}{3}{section.2.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.2}HHVM Bytecode Processing}{3}{section.2.2}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Intra-Procedural Control Flow Graph Construction}{3}{subsection.2.2.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Basic Block Partitioning}{3}{subsubsection*.4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Control Flow Graph Construction}{4}{subsubsection*.5}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Data Flow Analysis}{4}{subsection.2.2.2}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Def-Use Chains and Liveness Analysis}{4}{subsubsection*.6}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Liveness Calculation in CFG}}{5}{algorithm.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Use-Def Chains and Reaching-definition Analysis}{6}{subsubsection*.7}}
-\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Reaching-def Calculation in CFG}}{6}{algorithm.2}}
-\citation{ref4}
-\abx@aux@segm{0}{0}{ref4}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}String Automaton Construction}{7}{section.2.3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.1}Background}{3}{section.2.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Data-flow Analysis}{3}{subsection.2.1.1}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Control Flow Graph for Function t3f1}}{4}{figure.2.1}}
+\newlabel{fig:CFG}{{2.1}{4}{Control Flow Graph for Function t3f1}{figure.2.1}{}}
+\citation{ref5}
+\abx@aux@cite{ref5}
+\abx@aux@segm{0}{0}{ref5}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}HipHop VM and HipHop Bytecode}{6}{subsection.2.1.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.2}Inter-procedural CFG Construction}{6}{section.2.2}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Dataflow Expansion in ICFG}}{7}{algorithm.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Testcase Generation Algorithm}{8}{section.2.3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Precise String Analysis for Input Generation}{8}{subsection.2.3.1}}
+\newlabel{stringanalysis}{{2.3.1}{8}{Precise String Analysis for Input Generation}{subsection.2.3.1}{}}
+\newlabel{lst:label1}{{2.1}{10}{Sample PHP Code and Compiled HHBC Snippet}{lstlisting.2.1}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.1}Sample PHP Code and Compiled HHBC Snippet}{10}{lstlisting.2.1}}
+\newlabel{lst:label2}{{2.2}{10}{HHBC Snippet for line 3}{lstlisting.2.2}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.2}HHBC Snippet for line 3}{10}{lstlisting.2.2}}
 \citation{ref3}
 \abx@aux@segm{0}{0}{ref3}
-\newlabel{Supported PHP string operations}{{2.3}{8}{String Automaton Construction}{section.2.3}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Interface Discovery and Grouping}{8}{section.2.4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}Empirical Evaluation}{9}{chapter.3}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.1}Experiment Setup}{9}{section.3.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Experimental Subjects}{9}{subsection.3.1.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Tools Used in Evaluation}{9}{subsection.3.1.2}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{9}{section.3.2}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Interface Discovery Results}}{10}{table.3.1}}
-\newlabel{Interface Discovery Results}{{3.1}{10}{Interface Discovery Results}{table.3.1}{}}
+\@writefile{loa}{\defcounter {refsection}{0}\relax }\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Flow Graph Construction Algorithm}}{12}{algorithm.2}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Supported PHP Core operations}}{14}{table.2.1}}
+\newlabel{tab:b}{{2.1}{14}{Supported PHP Core operations}{table.2.1}{}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Supported PHP string operations}}{14}{table.2.2}}
+\newlabel{tab:a}{{2.2}{14}{Supported PHP string operations}{table.2.2}{}}
 \citation{ref3}
 \abx@aux@segm{0}{0}{ref3}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {4}Discussion}{11}{chapter.4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Array Content Propagation}{15}{subsection.2.3.2}}
+\newlabel{array_prop}{{2.3.2}{15}{Array Content Propagation}{subsection.2.3.2}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Interface Discovery Algorithm}{15}{section.2.4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}Empirical Evaluation}{16}{chapter.3}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.1}Interface Discovery}{11}{section.4.1}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.1}Experiment Setup}{16}{section.3.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Experimental Subjects}{16}{subsection.3.1.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Tools Used in Evaluation}{16}{subsection.3.1.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{16}{section.3.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Email Sender}{16}{subsection.3.2.1}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Fancy Hotel (CS4400 Class Project)}{17}{subsection.3.2.2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{User Login}{17}{subsubsection*.4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{User Registration}{18}{subsubsection*.5}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Room Search}{18}{subsubsection*.6}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Paycheck Calculator}{19}{subsection.3.2.3}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Code Coverage Performance Comparison with Naive Testcase Generator}}{20}{figure.3.1}}
+\newlabel{fig:result}{{3.1}{20}{Code Coverage Performance Comparison with Naive Testcase Generator}{figure.3.1}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {4}Discussion}{21}{chapter.4}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{23}{chapter.5}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\renewcommand {\cftchappresnum }{Appendix }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\renewcommand {\cftchapnumwidth }{6em}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {A}Experiment Equipment}{25}{Appendix.1.A}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {B}Function \textit  {buildFlowGraph} Continued}{26}{Appendix.1.B}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{appendix:algorithm}{{B}{26}{Function \textit {buildFlowGraph} Continued}{Appendix.1.B}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {C}Experiment Interface Output}{28}{Appendix.1.C}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{appendix:output}{{C}{28}{Experiment Interface Output}{Appendix.1.C}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {C.1}Email Sender}{28}{section.1.C.1}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{texts/email\textendash sender.txt}{28}{lstlisting.1.C.-2}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {C.2}User Login}{31}{section.1.C.2}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{texts/fancyhotel\textendash login.txt}{31}{lstlisting.1.C.-3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {C.3}User Registration}{32}{section.1.C.3}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{texts/fancyhotel\textendash registration.txt}{33}{lstlisting.1.C.-4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {C.4}Room Search}{36}{section.1.C.4}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{texts/fancyhotel\textendash roomsearch.txt}{36}{lstlisting.1.C.-5}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {C.5}Paycheck Calculator}{39}{section.1.C.5}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{texts/paycheck.txt}{39}{lstlisting.1.C.-6}}
 \abx@aux@refcontextdefaultsdone
 \abx@aux@defaultrefcontext{0}{ref1}{none/global/}
 \abx@aux@defaultrefcontext{0}{ref2}{none/global/}
 \abx@aux@defaultrefcontext{0}{ref4}{none/global/}
 \abx@aux@defaultrefcontext{0}{ref3}{none/global/}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{References}{13}{chapter*.8}}
+\abx@aux@defaultrefcontext{0}{ref5}{none/global/}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{References}{40}{chapter*.7}}

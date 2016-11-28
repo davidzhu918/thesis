@@ -4,44 +4,70 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{List of Figures}{4}{chapter*.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Introduction and Background}{1}{chapter.1}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Technical Approach}{3}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}System Requirements}{3}{section.2.1}
+\contentsline {section}{\numberline {2.1}Background}{3}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}HHVM Bytecode Processing}{3}{section.2.2}
+\contentsline {subsection}{\numberline {2.1.1}Data-flow Analysis}{3}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Intra-Procedural Control Flow Graph Construction}{3}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.1.2}HipHop VM and HipHop Bytecode}{6}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Basic Block Partitioning}{3}{subsubsection*.4}
+\contentsline {section}{\numberline {2.2}Inter-procedural CFG Construction}{6}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Control Flow Graph Construction}{4}{subsubsection*.5}
+\contentsline {section}{\numberline {2.3}Testcase Generation Algorithm}{8}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Data Flow Analysis}{4}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3.1}Precise String Analysis for Input Generation}{8}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Def-Use Chains and Liveness Analysis}{4}{subsubsection*.6}
+\contentsline {subsection}{\numberline {2.3.2}Array Content Propagation}{15}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Use-Def Chains and Reaching-definition Analysis}{6}{subsubsection*.7}
+\contentsline {section}{\numberline {2.4}Interface Discovery Algorithm}{15}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}String Automaton Construction}{7}{section.2.3}
+\contentsline {chapter}{\numberline {3}Empirical Evaluation}{16}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Interface Discovery and Grouping}{8}{section.2.4}
+\contentsline {section}{\numberline {3.1}Experiment Setup}{16}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Empirical Evaluation}{9}{chapter.3}
+\contentsline {subsection}{\numberline {3.1.1}Experimental Subjects}{16}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Experiment Setup}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.2}Tools Used in Evaluation}{16}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}Experimental Subjects}{9}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Results}{16}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Tools Used in Evaluation}{9}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2.1}Email Sender}{16}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Results}{9}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.2}Fancy Hotel (CS4400 Class Project)}{17}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Discussion}{11}{chapter.4}
+\contentsline {subsubsection}{User Login}{17}{subsubsection*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Interface Discovery}{11}{section.4.1}
+\contentsline {subsubsection}{User Registration}{18}{subsubsection*.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}
+\contentsline {subsubsection}{Room Search}{18}{subsubsection*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{13}{chapter*.8}
+\contentsline {subsection}{\numberline {3.2.3}Paycheck Calculator}{19}{subsection.3.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Discussion}{21}{chapter.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{23}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\renewcommand {\cftchappresnum }{Appendix }
+\defcounter {refsection}{0}\relax 
+\renewcommand {\cftchapnumwidth }{6em}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Experiment Equipment}{25}{Appendix.1.A}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Function \textit {buildFlowGraph} Continued}{26}{Appendix.1.B}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {C}Experiment Interface Output}{28}{Appendix.1.C}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.1}Email Sender}{28}{section.1.C.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.2}User Login}{31}{section.1.C.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.3}User Registration}{32}{section.1.C.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.4}Room Search}{36}{section.1.C.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C.5}Paycheck Calculator}{39}{section.1.C.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{References}{40}{chapter*.7}
