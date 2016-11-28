@@ -2,12 +2,12 @@
 
 \section{Experiment Setup}
 \subsection{Experimental Subjects}
-The experimental subjects used in the study is consisted of three student-developed projects that use PHP as their backend language.
+The experimental subjects used in the study is consisted of three student-developed projects that use PHP as their back-end language.
 
 \subsection{Tools Used in Evaluation}
-We evaluate the effectiveness of our interface discovery mechanism by comparing the number and quality of interfaces that it generates with the interfaces extracted by web crawlers. The web crawler tool that we used is OpenWebSpider, an open-sourced framework for crawling/spidering websites. For each interface output, we check if any of the HTTP requests in this output is processed in the backend program.
+We evaluate the effectiveness of our interface discovery mechanism by comparing the number and quality of interfaces that it generates with the interfaces extracted by web crawlers. The web crawler tool that we used is OpenWebSpider, an open-sourced framework for crawling/spidering websites. For each interface output, we check if any of the HTTP requests in this output is processed in the back-end program.
 
-We evaluate the effectiveness of our test request generation mechanism by comparing it against naive random test case generation. For each HTTP request, a set of possible values is generated for all of the fields in this request, creating a set of test HTTP requests, which are then sent to the server. The final code coverage of the backend PHP code is recorded.
+We evaluate the effectiveness of our test request generation mechanism by comparing it against naive random test case generation. For each HTTP request, a set of possible values is generated for all of the fields in this request, creating a set of test HTTP requests, which are then sent to the server. The final code coverage of the back-end PHP code is recorded.
 
 \section{Results}
 
@@ -45,7 +45,7 @@ Our penetration testing tool successfully identified both username and password 
 
 However, the analyzer identified session information created during login, which could potentially make subsequent penetration testing more thorough by exploiting user sessions.
 
-In addition, the user login program can be redirected to three different URLs once login information is validated. Since these URLs are not exposed to the front-end HTML, they were not identified by webcrawler. However, by performing static analysis on the source code, our penetration testing tool was able to discover all three of them.
+In addition, the user login program can be redirected to three different URLs once login information is validated. Since these URLs are not exposed to the front-end HTML, they were not identified by web crawler. However, by performing static analysis on the source code, our penetration testing tool was able to discover all three of them.
 
 \subsubsection{User Registration}
 Form Inputs

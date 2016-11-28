@@ -3,6 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{report}   %12 point font for Times New Roman
+\usepackage[backend=bibtex, sorting=none, style=ieee]{biblatex}  %reference manager
+\usepackage{microtype}
 \usepackage{graphicx}  %for images and plots
 \usepackage{listings}
 \lstset{
@@ -16,7 +18,6 @@
 \usepackage[explicit]{titlesec}  %title control and formatting
 \usepackage[titles]{tocloft}  %table of contents control and formatting
 \usepackage{booktabs}
-\usepackage[backend=bibtex, sorting=none, bibstyle=ieee]{biblatex}  %reference manager
 \usepackage[bookmarks=true, hidelinks]{hyperref}
 \usepackage[page]{appendix}  %for appendices
 \usepackage{rotating}  %for rotated, landscape images
@@ -227,7 +228,8 @@
 
 \begin{singlespace}  % use single-line spacing for multi-line text within a single reference
 	\setlength\bibitemsep{\baselineskip}  %manually set separataion betwen items in bibliography to double space
-	\printbibliography[title={References}]
+	\appto{\bibsetup}{\raggedright}
+  \printbibliography[title={References}]
 \end{singlespace}
 
 \addcontentsline{toc}{chapter}{References}  %add References section to Table of Contents

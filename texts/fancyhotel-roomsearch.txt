@@ -1,0 +1,83 @@
+Found URLs:
+========================================
+Interface 1
+========================================
+========================================
+Interface 2
+========================================
+Request 1
+***************************************
+_POST{usn}
+---------- Domain Info ------------ 
+Types   [String]
+Values: []
+
+String values:
+
+digraph FlowGraph {
+  N38 [label="<???>"]
+}
+
+----------- Test Cases ------------ 
+[]  6Ew
+
+***************************************
+Request 2
+***************************************
+_POST{con_pwd}
+---------- Domain Info ------------ 
+Types   []
+Values: []
+
+String values:
+
+digraph FlowGraph {
+  N54 [label="",shape=circle]
+  N168 -> N54
+  N167 [label="<???>"]
+  N168 [label="",shape=circle]
+  N167 -> N168
+}
+
+----------- Test Cases ------------ 
+[]  
+
+***************************************
+Request 3
+***************************************
+_POST{pwd}
+---------- Domain Info ------------ 
+Types   []
+Values: []
+
+String values:
+
+digraph FlowGraph {
+  N60 [label="",shape=circle]
+  N62 -> N60
+  N61 [label="<???>"]
+  N62 [label="",shape=circle]
+  N61 -> N62
+}
+
+----------- Test Cases ------------ 
+[]
+
+***************************************
+Request 4
+***************************************
+_POST{email}
+---------- Domain Info ------------ 
+Types   [String]
+Values: []
+
+String values:
+
+digraph FlowGraph {
+  N74 [label="<???>"]
+}
+
+----------- Test Cases ------------ 
+[]  o7Muhy1@Ph.com
+
+***************************************
