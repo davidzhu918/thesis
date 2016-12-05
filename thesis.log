@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  28 NOV 2016 01:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.11.3)  5 DEC 2016 02:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1807,8 +1807,28 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
  [1
 
 {/usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
-(./epigraph.texpdfTeX warning (ext4): destination with the same identifier (nam
-e{page.1}) has been already used, duplicate ignored
+(./approvalPage.tex
+Underfull \hbox (badness 10000) in paragraph at lines 94--97
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--101
+
+ []
+
+
+Overfull \hbox (19.90483pt too wide) in paragraph at lines 88--108
+[]  [] 
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.116 \end{titlepage}
+                      [1]) (./epigraph.texpdfTeX warning (ext4): destination wi
+th the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.20 \end{titlepage}
@@ -1865,7 +1885,7 @@ name{page.2}) has been already used, duplicate ignored
 l.1 \chapter
             {Technical Approach} [2]
 Chapter 2.
-<figures/CFG.png, id=228, 313.17pt x 706.64pt>
+<figures/CFG.png, id=231, 313.17pt x 706.64pt>
 File: figures/CFG.png Graphic file (type png)
  <use figures/CFG.png>
 Package pdftex.def Info: figures/CFG.png used on input line 12.
@@ -1962,7 +1982,7 @@ l.386
 Chapter 3.
 [16
 
-] [17] [18] <figures/result.png, id=356, 707.7642pt x 450.9648pt>
+] [17] [18] <figures/result.png, id=359, 707.7642pt x 450.9648pt>
 File: figures/result.png Graphic file (type png)
 
 <use figures/result.png>
@@ -2017,10 +2037,10 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 47324 strings out of 494447
- 979126 string characters out of 6166766
- 1454081 words of memory out of 5000000
- 49442 multiletter control sequences out of 15000+600000
+ 47336 strings out of 494447
+ 979358 string characters out of 6166766
+ 1454314 words of memory out of 5000000
+ 49451 multiletter control sequences out of 15000+600000
  30055 words of font info for 147 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  134i,10n,160p,10385b,3181s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2033,10 +2053,10 @@ fb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 b></usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></
 usr/local/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/l
 ocal/texlive/2016basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (47 pages, 301733 bytes).
+Output written on thesis.pdf (48 pages, 302889 bytes).
 PDF statistics:
- 900 PDF objects out of 1000 (max. 8388607)
- 830 compressed objects within 9 object streams
+ 903 PDF objects out of 1000 (max. 8388607)
+ 832 compressed objects within 9 object streams
  450 named destinations out of 1000 (max. 500000)
  25887 words of extra memory for PDF output out of 29859 (max. 10000000)
 

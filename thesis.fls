@@ -360,11 +360,13 @@ INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT epigraph.tex
-INPUT epigraph.tex
+INPUT approvalPage.tex
+INPUT approvalPage.tex
 INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT /usr/local/texlive/2016basic/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
+INPUT epigraph.tex
+INPUT epigraph.tex
 INPUT thesis.toc
 INPUT thesis.toc
 INPUT /usr/local/texlive/2016basic/texmf-dist/tex/latex/microtype/mt-cmr.cfg
